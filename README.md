@@ -38,27 +38,7 @@ Bucket name must be the same name used in the env file
 
 3. Run the data.sh script to add the dataset locally, do preprocessing and save it as a zip file
 
-4. Do data versioning with DVC and github
-
-```Bash
-dvc add data/data.zip
-
-git add data/data.zip.dvc data/.gitignore
-
-git commit -m "Update data version"
-
-git tag -a v0.0 -m "Updated data version 1.1"
-
-git push --tags
-
-dvc remote add myremote s3://mlops-dvc-INSPERUSERNAME
-
-dvc remote default myremote
-
-dvc push
-
-git push
-```
+4. Do data versioning with DVC and github using data_versioning.sh
 
 5. To use specific tag:
 
