@@ -2,10 +2,6 @@
 
 BUCKET_NAME=$1
 
-git push origin --delete $(git tag -l) 
-
-git tag -d $(git tag -l)
-
 dvc init
 
 dvc add data/data.zip
@@ -32,4 +28,4 @@ git push
 # Create first tag and send it to remote
 git tag -a v0.0.0 -m "Release version 0.0.0"
 
-git push --tags
+git push origin tag v0.0.0

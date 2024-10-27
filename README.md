@@ -20,7 +20,13 @@ This dataset can detect both cars and bikes. I merged both train and test datase
 ### Create a new data enviroment
 - If you would like to remove all tags and start dvc, do the following steps:
 
-1. Remove all tags already created.
+1. Remove all tags already created (remote and local)
+
+```Bash
+git push origin --delete $(git tag -l)
+
+git tag -d $(git tag -l)
+```
 
 2. Create S3 bucket to save dataset versions.
 
