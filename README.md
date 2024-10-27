@@ -17,15 +17,18 @@ This dataset can detect both cars and bikes. I merged both train and test datase
 
 ## Steps for data versioning
 
-1. Create S3 bucket to save dataset versions. Only necessary if you would like to create a new s3 bucket where the dataset versions are being saved:
+### Create a new data enviroment
+- If you would like to remove all tags and start dvc, do the following steps:
+
+1. Remove all tags already created.
+
+2. Create S3 bucket to save dataset versions.
 
 ```Bash
-dvc init
-
 python3 data/create_S3_dataset_bucket.py $bucket_name
 ```
 
-3. Run the ["data.sh"](./data.sh) script to add the dataset locally, preprocress and save it as a zip file
+3. Run data.sh to create the file "data/data.zip" with your preprocessed data.
 
 ```Bash
 chmod +x data.sh
@@ -33,34 +36,14 @@ chmod +x data.sh
 ./data.sh
 ```
 
-4. Run ["data_versioning"](./data_versioning.sh) to add the new data do dvc, create new tag, push to dvc and push to the remote repo
+4. Run configure_dvc.sh and pass as argument the recently created Bucket
 
 ```Bash
-chmod +x data_versioning.sh
+chmod +x configure_dvc.sh
 
-./data_versioning.sh vX.Y bucket-name
+./configure_dvc.sh [BUCKET]
 ```
 
-Where vX.Y is the dataset tag version and bucket-name is the bucket name. This command will also commit and push all change you made.
-
-5. To use specific tag:
-
-```Bash
-# List all available tags
-git tag
-
-# Use data from specific tag
-git checkout v1.1
-
-dvc checkout
-
-# Revert to the latest version
-git checkout main
-
-dvc checkout
-```
-
-[!WARNING]  
-Only use tags after 1.0.
-
+After that, 
 ## Steps for training and deploy
+
