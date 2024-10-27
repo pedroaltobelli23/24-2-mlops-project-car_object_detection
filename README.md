@@ -44,6 +44,12 @@ chmod +x configure_dvc.sh
 ./configure_dvc.sh [BUCKET]
 ```
 
-After that, 
-## Steps for training and deploy
+After that,  you will have a tag v0.0.0 with the first version of the dataset!
+
+### Steps for creating new tag
+1. Do changes in the function prerpocess from preprocess.py. Then, run data.sh
+
+```Bash
+./data.sh
+```
 

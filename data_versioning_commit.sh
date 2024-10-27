@@ -11,5 +11,7 @@ dvc commit data/data.csv
 dvc push
 
 git add .
-git commit -m "version $TAG_VERSION"
-git push
+git commit -m "dataset version $TAG_VERSION"
+git push 
+
+git push "$TAG_VERSION"
