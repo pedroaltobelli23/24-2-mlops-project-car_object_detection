@@ -86,5 +86,3 @@ if __name__=="__main__":
     preprocess(train_dir,valid_dir,drop=0.5)
     
     logging.info("Preprocessing complete.")
-    
-    

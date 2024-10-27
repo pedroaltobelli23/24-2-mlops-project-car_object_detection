@@ -59,3 +59,27 @@ After that,  you will have a tag v0.0.0 with the first version of the dataset!
 ./data.sh
 ```
 
+2. Then, run the following commands:
+```Bash
+dvc commit data/data.zip
+dvc push
+
+git add .
+git commit -m "version vA.B.C"
+git push
+
+git tag -a vA.B.C -m "Release version A.B.C"
+```
+
+3. To save tag in remote repo:
+
+```Bash
+git push origin tag vA.B.C
+```
+
+3. To use a specific data version:
+
+```Bash
+git checkout vA.B.C
+dvc checkout
+```
