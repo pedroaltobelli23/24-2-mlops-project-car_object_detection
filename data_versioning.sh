@@ -14,7 +14,7 @@ git tag -a "$TAG_VERSION" -m "Updated data version $TAG_VERSION"
 git push --tags
 
 # This command will raise an error with it is your first time doing it. But it will work fine
-dvc remote add myremote s3://"$BUCKET_NAME"
+dvc remote add -f myremote s3://"$BUCKET_NAME"
 
 dvc remote default myremote
 
