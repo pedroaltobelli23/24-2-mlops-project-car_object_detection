@@ -1,0 +1,5 @@
+python-dotenv
+dvc
+requests
+roboflow
+boto3
