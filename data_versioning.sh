@@ -20,4 +20,10 @@ dvc remote default myremote
 
 dvc push
 
+read -p "Enter commit message: " COMMIT_MESSAGE
+
+git add .
+
+git commit -m "$COMMIT_MESSAGE"
+
 git push

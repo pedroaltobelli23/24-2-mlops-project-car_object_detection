@@ -84,7 +84,7 @@ if __name__=="__main__":
     valid_dir = "data/data/valid"
     
     merge_train_test(train_dir,test_dir)
-    preprocess(train_dir,valid_dir,drop=0.3)
+    preprocess(train_dir,valid_dir,drop=0.1)
     
     logging.info("Preprocessing complete.")
     

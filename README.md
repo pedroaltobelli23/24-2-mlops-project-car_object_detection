@@ -26,19 +26,29 @@ Inside github workflow:
 
 1. Of course, install the repo locally
 
-2. Create S3 bucket to save versions. Only necessary if it is the first time doing data versioning in the repository:
+2. Create S3 bucket to save versions. Only necessary if you would like to create a new s3 bucket where the dataset versions are being saved:
 
 ```Bash
-dvc init
-
 python3 data/create_S3_dataset_bucket.py $bucket_name
 ```
 
-Bucket name must be the same name used in the env file
-
 3. Run the data.sh script to add the dataset locally, do preprocessing and save it as a zip file
 
+```Bash
+chmod +x data.sh
+
+./data.sh
+```
+
 4. Do data versioning with DVC and github using data_versioning.sh
+
+```Bash
+chmod +x data_versioning.sh
+
+./data_versioning.sh vX.Y bucket-name
+```
+
+Where vX.Y is the dataset tag version and bucket-name is the bucket name. This command will also commit and push all change you made.
 
 5. To use specific tag:
 

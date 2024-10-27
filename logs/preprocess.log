@@ -13,3 +13,8 @@
 24-10-27 03:48     root     INFO     Dropped 8347/27825 from data/data/train
 24-10-27 03:48     root     INFO     Dropped 758/2529 from data/data/valid
 24-10-27 03:48     root     INFO     Preprocessing complete.
+24-10-27 04:06     root     INFO     Starting preprocess...
+24-10-27 04:06     root     INFO     Removed test directory: data/data/test
+24-10-27 04:06     root     INFO     Dropped 2782/27825 from data/data/train
+24-10-27 04:06     root     INFO     Dropped 252/2529 from data/data/valid
+24-10-27 04:06     root     INFO     Preprocessing complete.
