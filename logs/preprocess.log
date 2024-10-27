@@ -1,5 +1,5 @@
-24-10-27 01:11     root     INFO     Starting preprocess...
-24-10-27 01:11     root     INFO     Removed test directory: data/data/test
-24-10-27 01:11     root     INFO     Dropped 13912/27825 from data/data/train
-24-10-27 01:11     root     INFO     Dropped 1264/2529 from data/data/valid
-24-10-27 01:11     root     INFO     Preprocessing complete.
+24-10-27 03:01     root     INFO     Starting preprocess...
+24-10-27 03:01     root     INFO     Removed test directory: data/data/test
+24-10-27 03:01     root     INFO     Dropped 22260/27825 from data/data/train
+24-10-27 03:01     root     INFO     Dropped 2023/2529 from data/data/valid
+24-10-27 03:01     root     INFO     Preprocessing complete.

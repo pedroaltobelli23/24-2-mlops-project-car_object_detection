@@ -26,4 +26,52 @@ Inside github workflow:
 
 1. Of course, install the repo locally
 
-2. Run the command data.sh to install data from the source (https://universe.roboflow.com/openglpro/stanford_car/dataset/10) and initialize dvc:
+2. Create S3 bucket to save versions. Only necessary if it is the first time doing data versioning in the repository:
+
+```Bash
+dvc init
+
+python3 data/create_S3_dataset_bucket.py $bucket_name
+```
+
+Bucket name must be the same name used in the env file
+
+3. Run the data.sh script to add the dataset locally, do preprocessing and save it as a zip file
+
+4. Do data versioning with DVC and github
+
+```Bash
+dvc add data/data.zip
+
+git add data/data.zip.dvc data/.gitignore
+
+git commit -m "Update data version"
+
+git tag -a v0.0 -m "Updated data version 1.1"
+
+git push --tags
+
+dvc remote add myremote s3://mlops-dvc-INSPERUSERNAME
+
+dvc remote default myremote
+
+dvc push
+
+git push
+```
+
+5. To use specific tag:
+
+```Bash
+# List all available tags
+git tag
+
+git checkout v1.1
+
+dvc pull
+
+# Revert to the latest version
+git checkout main
+dvc pull
+```
+

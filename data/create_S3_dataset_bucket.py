@@ -30,6 +30,6 @@ try:
         CreateBucketConfiguration={"LocationConstraint": os.getenv("AWS_REGION")},
     )
 
-    logging.info("Bucket created")
+    logging.info(f"Bucket {bucket_name} created")
 except Exception as e:
     logging.error(traceback.format_exc())

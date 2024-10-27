@@ -64,9 +64,9 @@ def preprocess(train_dir,valid_dir,drop=0.5):
         n = len(img_files)
         num_to_drop = int(n*drop)
         
-        imgs_to_remove = img_files[num_to_drop:]
+        imgs_to_remove = img_files[:num_to_drop]
             
-        labels_to_remove = label_files[num_to_drop:]
+        labels_to_remove = label_files[:num_to_drop]
         
         for img,label in zip(imgs_to_remove,labels_to_remove):
             os.remove(img)
@@ -84,7 +84,7 @@ if __name__=="__main__":
     valid_dir = "data/data/valid"
     
     merge_train_test(train_dir,test_dir)
-    preprocess(train_dir,valid_dir)
+    preprocess(train_dir,valid_dir,drop=0.8)
     
     logging.info("Preprocessing complete.")
     
