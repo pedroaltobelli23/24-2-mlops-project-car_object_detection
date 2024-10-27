@@ -8,31 +8,24 @@ I used the YOLOv8 dataset
 
 This dataset can detect both cars and bikes. I merged both train and test dataset using the script data/merge_train_test.py
 
-
 ## Requirements
 - python-dotenv
+- dvc
+- requests
 - roboflow
-
-- User dowload the data and upload it to a S3 bucket (dataset-bucket) using DVS (this step is not inside the workflow, and only happen when the user download the dataset and run the command that do this task)
-
-Inside github workflow:
-- Train the model with data that is inside the S3 Bucket (dataset-bucket). Mlflow for tracking and 
-- send the .pt to a S3 Bucket (models bucket)
-- deploy application using this .pt and lambda
-- Create API endpoint
-
+- boto3
 
 ## Steps for data versioning
 
-1. Of course, install the repo locally
-
-2. Create S3 bucket to save versions. Only necessary if you would like to create a new s3 bucket where the dataset versions are being saved:
+1. Create S3 bucket to save dataset versions. Only necessary if you would like to create a new s3 bucket where the dataset versions are being saved:
 
 ```Bash
+dvc init
+
 python3 data/create_S3_dataset_bucket.py $bucket_name
 ```
 
-3. Run the data.sh script to add the dataset locally, do preprocessing and save it as a zip file
+3. Run the ["data.sh"](./data.sh) script to add the dataset locally, preprocress and save it as a zip file
 
 ```Bash
 chmod +x data.sh
@@ -40,7 +33,7 @@ chmod +x data.sh
 ./data.sh
 ```
 
-4. Do data versioning with DVC and github using data_versioning.sh
+4. Run ["data_versioning"](./data_versioning.sh) to add the new data do dvc, create new tag, push to dvc and push to the remote repo
 
 ```Bash
 chmod +x data_versioning.sh
@@ -56,12 +49,18 @@ Where vX.Y is the dataset tag version and bucket-name is the bucket name. This c
 # List all available tags
 git tag
 
+# Use data from specific tag
 git checkout v1.1
 
-dvc pull
+dvc checkout
 
 # Revert to the latest version
 git checkout main
-dvc pull
+
+dvc checkout
 ```
 
+[!WARNING]  
+Only use tags after 1.0.
+
+## Steps for training and deploy

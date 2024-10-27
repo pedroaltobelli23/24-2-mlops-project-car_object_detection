@@ -76,7 +76,6 @@ def preprocess(train_dir,valid_dir,drop=0.5):
     
     return None
 
-
 if __name__=="__main__":
     logging.info("Starting preprocess...")
     train_dir = "data/data/train"
