@@ -10,4 +10,4 @@ git add .
 git commit -m "dataset version $TAG_VERSION"
 git push 
 
-git push "$TAG_VERSION"
+git push origin tag "$TAG_VERSION"
