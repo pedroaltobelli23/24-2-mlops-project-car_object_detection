@@ -53,7 +53,10 @@ chmod +x configure_dvc.sh
 After that,  you will have a tag v0.0.0 with the first version of the dataset!
 
 ### Steps for creating new tag
-1. Do changes in the function prerpocess from preprocess.py. Then, run data.sh
+1. Do changes in the function prepocess from preprocess.py. Then, run data.sh
+
+[!WARNING]
+Check if you are at main
 
 ```Bash
 ./data.sh

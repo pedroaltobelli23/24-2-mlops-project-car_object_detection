@@ -61,19 +61,21 @@ def preprocess(train_dir,valid_dir,drop=0.5):
         img_files = sorted(glob(os.path.join(img_dir,"*.jpg")))
         label_files = sorted(glob(os.path.join(label_dir,"*.txt")))
         
-        n = len(img_files)
-        num_to_drop = int(n*drop)
-        
-        imgs_to_remove = img_files[:num_to_drop]
+        if drop>0:
+            n = len(img_files)
+            num_to_drop = int(n*drop)
+            imgs_to_remove = img_files[:num_to_drop]
+                
+            labels_to_remove = label_files[:num_to_drop]
             
-        labels_to_remove = label_files[:num_to_drop]
-        
-        for img,label in zip(imgs_to_remove,labels_to_remove):
-            os.remove(img)
-            os.remove(label)
-            
-        logging.info(f"Dropped {num_to_drop}/{n} from {dir}")
-    
+            for img,label in zip(imgs_to_remove,labels_to_remove):
+                os.remove(img)
+                os.remove(label)
+                
+            logging.info(f"Dropped {num_to_drop}/{n} from {dir}")
+        else:
+            logging.info("Nothing dropped. No preprocessing")
+                
     return None
 
 if __name__=="__main__":
@@ -83,6 +85,6 @@ if __name__=="__main__":
     valid_dir = "data/data/valid"
     
     merge_train_test(train_dir,test_dir)
-    preprocess(train_dir,valid_dir,drop=0.5)
+    preprocess(train_dir,valid_dir,drop=0)
     
     logging.info("Preprocessing complete.")
