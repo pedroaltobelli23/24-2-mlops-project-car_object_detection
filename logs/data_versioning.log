@@ -1,3 +1,21 @@
 fatal: tag 'v0.1.0' already exists
 ERROR: failed to commit data/data.zip - unable to commit changed stage: 'data/data.zip.dvc'. Use `-f|--force` to force.
 Everything is up to date.
+Auto packing the repository in background for optimum performance.
+See "git help gc" for manual housekeeping.
+warning: The last gc run reported the following. Please correct the root cause
+and remove .git/gc.log.
+Automatic cleanup will not be performed until the file is removed.
+
+warning: There are too many unreachable loose objects; run 'git prune' to remove them.
+
+[main c62d51d] dataset version v0.1.0
+ 2 files changed, 12 insertions(+), 3 deletions(-)
+ rewrite logs/data_versioning.log (84%)
+To https://github.com/insper-classroom/24-2-mlops-project-car_object_detection.git
+   17a88e7..c62d51d  main -> main
+fatal: 'v0.1.0' does not appear to be a git repository
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
