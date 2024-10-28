@@ -6,13 +6,14 @@ import random
 import logging
 import traceback
 
-logging.basicConfig(
+logging.basicConfig(format='%(asctime)s,%(msecs)03d %(levelname)-8s [%(filename)s:%(lineno)d] %(message)s',
+    datefmt='%Y-%m-%d:%H:%M:%S',
     level=logging.INFO,
-    format="%(asctime)-18s %(name)-8s %(levelname)-8s %(message)s",
-    datefmt="%y-%m-%d %H:%M",
-    filename="logs/preprocess.log",
-    filemode="a",
+    filename="logs/data.log",
+    filemode="a"
 )
+
+logger = logging.getLogger(__name__)
 
 def move_files(file_list,origin_dir, destination_dir):
     """
@@ -43,7 +44,7 @@ def merge_train_test(train_dir,test_dir,remove_test=True):
 
     if remove_test:
         shutil.rmtree(test_dir)
-        logging.info(f"Removed test directory: {test_dir}")
+        logger.info(f"Removed test directory: {test_dir}")
     
     return None
 
@@ -73,14 +74,14 @@ def preprocess(train_dir,valid_dir,drop=0.5):
                 os.remove(img)
                 os.remove(label)
                 
-            logging.info(f"Dropped {num_to_drop}/{n} from {dir}")
+            logger.info(f"Dropped {num_to_drop}/{n} from {dir}")
         else:
-            logging.info("Nothing dropped. No preprocessing")
+            logger.info("Nothing dropped. No preprocessing")
             
     return None
 
 if __name__=="__main__":
-    logging.info("Starting preprocess...")
+    logger.info("Starting preprocess...")
     train_dir = "data/data/train"
     test_dir = "data/data/test"
     valid_dir = "data/data/valid"
@@ -89,6 +90,6 @@ if __name__=="__main__":
         merge_train_test(train_dir,test_dir)
         preprocess(train_dir,valid_dir,drop=0.8)
     
-        logging.info("Preprocessing complete.")
+        logger.info("Preprocessing complete.")
     except Exception as e:
         locals.error(traceback.format_exc())

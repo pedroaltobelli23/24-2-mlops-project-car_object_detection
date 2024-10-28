@@ -11,7 +11,7 @@ logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)-18s %(name)-8s %(levelname)-8s %(message)s",
     datefmt="%y-%m-%d %H:%M",
-    filename="logs/bucket.log",
+    filename="logs/data.log",
     filemode="a",
 )
 
