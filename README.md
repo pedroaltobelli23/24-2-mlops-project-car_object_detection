@@ -28,6 +28,8 @@ git push origin --delete $(git tag -l)
 git tag -d $(git tag -l)
 ```
 
+(Also ensure that all tags are removed using the repository webpage)
+
 2. Create S3 bucket to save dataset versions.
 
 ```Bash
