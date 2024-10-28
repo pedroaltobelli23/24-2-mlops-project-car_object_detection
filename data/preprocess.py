@@ -4,6 +4,7 @@ from tqdm import tqdm
 from glob import glob
 import random
 import logging
+import traceback
 
 logging.basicConfig(
     level=logging.INFO,
@@ -46,7 +47,7 @@ def merge_train_test(train_dir,test_dir,remove_test=True):
     
     return None
 
-def preprocess(train_dir,valid_dir,dir,drop=0.5):
+def preprocess(train_dir,valid_dir,drop=0.5):
     """
     Simple preprocessing. Drop drop*100 from the train and valid datasets
 
@@ -75,11 +76,7 @@ def preprocess(train_dir,valid_dir,dir,drop=0.5):
             logging.info(f"Dropped {num_to_drop}/{n} from {dir}")
         else:
             logging.info("Nothing dropped. No preprocessing")
-                
-                
-    os.remove(os.path.join(dir,"data.yaml"))
-    shutil.copy("data.yaml",dir)
-    
+            
     return None
 
 if __name__=="__main__":
@@ -88,7 +85,10 @@ if __name__=="__main__":
     test_dir = "data/data/test"
     valid_dir = "data/data/valid"
     
-    merge_train_test(train_dir,test_dir)
-    preprocess(train_dir,valid_dir,drop=0.8)
+    try:
+        merge_train_test(train_dir,test_dir)
+        preprocess(train_dir,valid_dir,drop=0.8)
     
-    logging.info("Preprocessing complete.")
+        logging.info("Preprocessing complete.")
+    except Exception as e:
+        locals.error(traceback.format_exc())
