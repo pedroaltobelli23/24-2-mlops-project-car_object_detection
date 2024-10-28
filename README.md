@@ -86,3 +86,16 @@ git push origin tag vA.B.C
 git checkout vA.B.C
 dvc checkout
 ```
+
+## Steps for training
+
+[!WARNING]
+For training, CUDA 12.6 was used. It is necessary to install CUDA to work
+
+### Unzip data
+
+- Unzip data using the command:
+
+```Bash
+unzip data/data.zip
+```

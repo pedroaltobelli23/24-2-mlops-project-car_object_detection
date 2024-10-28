@@ -1,5 +1,7 @@
 python-dotenv
-dvc
+dvc[s3]
 requests
 roboflow
 boto3
+mlflow
+ultralytics

@@ -18,3 +18,5 @@
 24-10-27 15:30     root     INFO     Nothing dropped. No preprocessing
 24-10-27 15:30     root     INFO     Nothing dropped. No preprocessing
 24-10-27 15:30     root     INFO     Preprocessing complete.
+24-10-28 01:41     root     INFO     Starting preprocess...
+24-10-28 01:41     root     INFO     Removed test directory: data/data/test

@@ -46,7 +46,7 @@ def merge_train_test(train_dir,test_dir,remove_test=True):
     
     return None
 
-def preprocess(train_dir,valid_dir,drop=0.5):
+def preprocess(train_dir,valid_dir,dir,drop=0.5):
     """
     Simple preprocessing. Drop drop*100 from the train and valid datasets
 
@@ -76,6 +76,10 @@ def preprocess(train_dir,valid_dir,drop=0.5):
         else:
             logging.info("Nothing dropped. No preprocessing")
                 
+                
+    os.remove(os.path.join(dir,"data.yaml"))
+    shutil.copy("data.yaml",dir)
+    
     return None
 
 if __name__=="__main__":
@@ -85,6 +89,6 @@ if __name__=="__main__":
     valid_dir = "data/data/valid"
     
     merge_train_test(train_dir,test_dir)
-    preprocess(train_dir,valid_dir,drop=0)
+    preprocess(train_dir,valid_dir,drop=0.6)
     
     logging.info("Preprocessing complete.")
