@@ -22,9 +22,6 @@ logging.basicConfig(format='%(asctime)s,%(msecs)03d %(levelname)-8s [%(filename)
 
 logger = logging.getLogger(__name__)
 
-rf_logger = logging.getLogger("roboflow")
-rf_logger.setLevel(logging.INFO)
-
 def dowload_dataset(location):
     """Download and unzip data from https://universe.roboflow.com/openglpro/stanford_car/dataset/10
     and put it inside "data" folder

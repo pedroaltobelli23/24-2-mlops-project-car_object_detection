@@ -5,91 +5,118 @@ from glob import glob
 import random
 import logging
 import traceback
+import argparse
 
-logging.basicConfig(format='%(asctime)s,%(msecs)03d %(levelname)-8s [%(filename)s:%(lineno)d] %(message)s',
-    datefmt='%Y-%m-%d:%H:%M:%S',
+logging.basicConfig(
+    format="%(asctime)s,%(msecs)03d %(levelname)-8s [%(filename)s:%(lineno)d] %(message)s",
+    datefmt="%Y-%m-%d:%H:%M:%S",
     level=logging.INFO,
     filename="logs/data.log",
-    filemode="a"
+    filemode="a",
 )
 
 logger = logging.getLogger(__name__)
 
-def move_files(file_list,origin_dir, destination_dir):
+
+def move_files(file_list, origin_dir, destination_dir):
     """
     Move list of files from origin diretory to destination diretory
-    
+
     Args:
         file_list (list): All files inside origin dir that will be moved
         origin_dir (strPath): Source diretory
         destination_dir (strPath): Destination diretory
     """
     for file_name in tqdm(file_list):
-        shutil.move(os.path.join(origin_dir,file_name),os.path.join(destination_dir, file_name))
-        
-def merge_train_test(train_dir,test_dir,remove_test=True):
+        shutil.move(
+            os.path.join(origin_dir, file_name),
+            os.path.join(destination_dir, file_name),
+        )
+
+
+def merge_train_test(train_dir, test_dir, remove_test=True):
     """
     From the https://universe.roboflow.com/openglpro/stanford_car dataset, merge the
     test folder with the train folder.
-    
+
     Args:
         remove_test (bool): Remove the test folder after merge. Default is True.
     """
-    
-    test_images = [f for f in os.listdir(os.path.join(test_dir,"images"))]
-    test_labels = [f for f in os.listdir(os.path.join(test_dir,"labels"))]
 
-    move_files(file_list=test_images,origin_dir=os.path.join(test_dir,"images"),destination_dir=os.path.join(train_dir,"images"))
-    move_files(file_list=test_labels,origin_dir=os.path.join(test_dir,"labels"),destination_dir=os.path.join(train_dir,"labels"))
+    test_images = [f for f in os.listdir(os.path.join(test_dir, "images"))]
+    test_labels = [f for f in os.listdir(os.path.join(test_dir, "labels"))]
+
+    move_files(
+        file_list=test_images,
+        origin_dir=os.path.join(test_dir, "images"),
+        destination_dir=os.path.join(train_dir, "images"),
+    )
+    
+    move_files(
+        file_list=test_labels,
+        origin_dir=os.path.join(test_dir, "labels"),
+        destination_dir=os.path.join(train_dir, "labels"),
+    )
 
     if remove_test:
         shutil.rmtree(test_dir)
         logger.info(f"Removed test directory: {test_dir}")
-    
+
     return None
 
-def preprocess(train_dir,valid_dir,drop=0.5):
+
+def preprocess(train_dir, valid_dir, drop=0.5):
     """
     Simple preprocessing. Drop drop*100 from the train and valid datasets
 
     Args:
-        drop (int): ratio to be dropped. Default is 0.5
+        drop (int): Ratio from dataset to be dropped
     """
-    
-    for dir in [train_dir,valid_dir]:
-        img_dir = os.path.join(dir,"images")
-        label_dir = os.path.join(dir,"labels")
-        
-        img_files = sorted(glob(os.path.join(img_dir,"*.jpg")))
-        label_files = sorted(glob(os.path.join(label_dir,"*.txt")))
-        
-        if drop>0:
+
+    for dir in [train_dir, valid_dir]:
+        img_dir = os.path.join(dir, "images")
+        label_dir = os.path.join(dir, "labels")
+
+        img_files = sorted(glob(os.path.join(img_dir, "*.jpg")))
+        label_files = sorted(glob(os.path.join(label_dir, "*.txt")))
+
+        if 0 < drop < 1:
+
             n = len(img_files)
-            num_to_drop = int(n*drop)
+            num_to_drop = int(n * drop)
             imgs_to_remove = img_files[:num_to_drop]
-                
+
             labels_to_remove = label_files[:num_to_drop]
-            
-            for img,label in zip(imgs_to_remove,labels_to_remove):
+
+            for img, label in zip(imgs_to_remove, labels_to_remove):
                 os.remove(img)
                 os.remove(label)
-                
+
             logger.info(f"Dropped {num_to_drop}/{n} from {dir}")
         else:
             logger.info("Nothing dropped. No preprocessing")
-            
+
     return None
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     logger.info("Starting preprocess...")
     train_dir = "data/data/train"
     test_dir = "data/data/test"
     valid_dir = "data/data/valid"
-    
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--drop", type=float, help="Ratio from dataset to be dropped. 0 to 1.",default=0.5
+    )
+
+    args = parser.parse_args()
+
     try:
-        merge_train_test(train_dir,test_dir)
-        preprocess(train_dir,valid_dir,drop=0.8)
-    
+        merge_train_test(train_dir, test_dir)
+        logging.info(f"Drop used: {args.drop}")
+        preprocess(train_dir, valid_dir, drop=args.drop)
+
         logger.info("Preprocessing complete.")
     except Exception as e:
         locals.error(traceback.format_exc())

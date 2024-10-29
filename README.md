@@ -10,15 +10,20 @@ This dataset can detect both cars and bikes. I merged both train and test datase
 
 ## Requirements
 - python-dotenv
-- dvc
+- dvc[s3]
 - requests
 - roboflow
 - boto3
+- ultralytics
+
+> [!WARNING]
+> If you would like to run with GPU, download CUDA Toolkit 12.6 https://developer.nvidia.com/cuda-downloads
 
 ## Steps for data versioning
 
 ### Create a new data enviroment
-- If you would like to remove all tags and start dvc, do the following steps:
+
+Sometimes, it is necessary to start everything all again. The following steps show how can you do that:
 
 1. Remove all tags already created (remote and local)
 
@@ -28,43 +33,65 @@ git push origin --delete $(git tag -l)
 git tag -d $(git tag -l)
 ```
 
-(Also ensure that all tags are removed using the repository webpage)
+Ensure the tags were erased:
 
-2. Create S3 bucket to save dataset versions.
+![tags_erased](./imgs/tags_erased.png)
+
+2. Also, remove the folder ".dvc/" and the files "data/data.zip.dvc" and ".dvcignore"
 
 ```Bash
-python3 data/create_S3_dataset_bucket.py $bucket_name
+rm -rf .dvc/ data/data.zip.dvc .dvcignore
 ```
 
-3. Run data.sh to create the file "data/data.zip" with your preprocessed data.
+3. Create S3 bucket to save dataset versions, and remove any S3 bucket if necessary.
+
+```Bash
+# List S3 buckets in the AWS account if necessary
+python3 data/list_S3_buckets.py
+
+# Create S3 bucket
+python3 data/create_S3_bucket.py $bucket_name
+
+# Delete S3 bucket
+python3 data/delete_S3_bucket.py $bucket_name
+```
+
+4. Run data.sh to create the file "data/data.zip" with your preprocessed data. Drop value is the ratio of the dowloaded dataset that will be erased.
 
 ```Bash
 chmod +x data.sh
 
-./data.sh
+./data.sh <drop_value>
 ```
 
-4. Run configure_dvc.sh and pass as argument the recently created Bucket
+5. Run configure_dvc.sh and pass as argument the recently created Bucket
 
 ```Bash
 chmod +x configure_dvc.sh
 
-./configure_dvc.sh [BUCKET]
+./configure_dvc.sh <BUCKET>
 ```
 
 After that,  you will have a tag v0.0.0 with the first version of the dataset!
 
 ### Steps for creating new tag
-1. Do changes in the function prepocess from preprocess.py. Then, run data.sh
 
-[!WARNING]
-Check if you are at main
+Everytime you want to create a new dataset version, run the steps bellow:
+
+1. Do changes in the function prepocess from [preprocess.py](./data/preprocess.py). Then, run [data.sh](./data.sh):
+
+> [!WARNING]
+> Checkout if you are at main:
+> ```Bash
+> git checkout main
+> ```
 
 ```Bash
 ./data.sh
 ```
 
-2. Then, run the following commands:
+2. Run the following commands:
+
 ```Bash
 dvc commit data/data.zip
 dvc push
@@ -91,13 +118,31 @@ dvc checkout
 
 ## Steps for training
 
-[!WARNING]
-For training, CUDA 12.6 was used. It is necessary to install CUDA to work
+### Using Mlflow for model tracking
 
-### Unzip data
-
-- Unzip data using the command:
+1. Unzip data using the command:
 
 ```Bash
 unzip data/data.zip
 ```
+
+2. In the root folder of the repository, start Mlflow:
+
+```Bash
+mlflow ui --backend-store-uri ./runs/mlflow
+```
+
+![empty_mlfow](./imgs/empty_mlflow.png)
+
+3. In another terminal, train model:
+
+```Bash
+cd src/
+
+python3 train.py
+```
+
+4. Train again, changing hyperparameters if necessary.
+
+
+![mlflow_working](./imgs/mlflow_working.png)

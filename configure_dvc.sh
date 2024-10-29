@@ -2,6 +2,12 @@
 
 BUCKET_NAME=$1
 
+if [ -z "$DROP" ]; then
+    echo "Error: BUCKET_NAME parameter is missing."
+    echo "Usage: $0 <bucket_name>"
+    exit 1
+fi
+
 dvc init
 
 dvc add data/data.zip
