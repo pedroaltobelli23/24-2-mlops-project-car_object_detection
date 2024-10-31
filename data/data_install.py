@@ -8,12 +8,10 @@ from roboflow import Roboflow
 from urllib.error import HTTPError
 import sys
 
-
-current_filename = os.path.basename(sys.argv[0])
-
 load_dotenv()
 
-logging.basicConfig(format='%(asctime)s,%(msecs)03d %(levelname)-8s [%(filename)s:%(lineno)d] %(message)s',
+logging.basicConfig(
+    format='%(asctime)s,%(msecs)03d %(levelname)-8s [%(filename)s:%(lineno)d] %(message)s',
     datefmt='%Y-%m-%d:%H:%M:%S',
     level=logging.INFO,
     filename="logs/data.log",

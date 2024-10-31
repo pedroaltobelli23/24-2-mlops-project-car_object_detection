@@ -1,0 +1,15 @@
+artifact_uri: file:///home/pedro/Documents/mlops/24-2-mlops-project-car_object_detection/src/../models/runs/mlflow/825173388349876174/a82d9f5bffc146ea9186ede00291ec75/artifacts
+end_time: 1730398582870
+entry_point_name: ''
+experiment_id: '825173388349876174'
+lifecycle_stage: active
+run_id: a82d9f5bffc146ea9186ede00291ec75
+run_name: mysterious-conch-32
+run_uuid: a82d9f5bffc146ea9186ede00291ec75
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1730398508041
+status: 3
+tags: []
+user_id: pedro

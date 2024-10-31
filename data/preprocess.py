@@ -8,15 +8,14 @@ import traceback
 import argparse
 
 logging.basicConfig(
-    format="%(asctime)s,%(msecs)03d %(levelname)-8s [%(filename)s:%(lineno)d] %(message)s",
-    datefmt="%Y-%m-%d:%H:%M:%S",
+    format='%(asctime)s,%(msecs)03d %(levelname)-8s [%(filename)s:%(lineno)d] %(message)s',
+    datefmt='%Y-%m-%d:%H:%M:%S',
     level=logging.INFO,
     filename="logs/data.log",
-    filemode="a",
+    filemode="a"
 )
 
 logger = logging.getLogger(__name__)
-
 
 def move_files(file_list, origin_dir, destination_dir):
     """
@@ -32,6 +31,9 @@ def move_files(file_list, origin_dir, destination_dir):
             os.path.join(origin_dir, file_name),
             os.path.join(destination_dir, file_name),
         )
+        
+    logging.debug(f"Files moved from {origin_dir} to {destination_dir}")
+
 
 
 def merge_train_test(train_dir, test_dir, remove_test=True):
@@ -60,7 +62,7 @@ def merge_train_test(train_dir, test_dir, remove_test=True):
 
     if remove_test:
         shutil.rmtree(test_dir)
-        logger.info(f"Removed test directory: {test_dir}")
+        logger.debug(f"Removed test directory: {test_dir}")
 
     return None
 
@@ -92,9 +94,9 @@ def preprocess(train_dir, valid_dir, drop=0.5):
                 os.remove(img)
                 os.remove(label)
 
-            logger.info(f"Dropped {num_to_drop}/{n} from {dir}")
+            logger.info(f"Dropped {num_to_drop}/{n} images from {dir}")
         else:
-            logger.info("Nothing dropped. No preprocessing")
+            logger.info("Nothing dropped. No preprocessing.")
 
     return None
 

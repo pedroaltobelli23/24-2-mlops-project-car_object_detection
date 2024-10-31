@@ -9,11 +9,11 @@ from botocore.exceptions import ClientError
 load_dotenv()
 
 logging.basicConfig(
+    format='%(asctime)s,%(msecs)03d %(levelname)-8s [%(filename)s:%(lineno)d] %(message)s',
+    datefmt='%Y-%m-%d:%H:%M:%S',
     level=logging.INFO,
-    format="%(asctime)-18s %(name)-8s %(levelname)-8s %(message)s",
-    datefmt="%y-%m-%d %H:%M",
     filename="logs/s3.log",
-    filemode="a",
+    filemode="a"
 )
 
 def list_s3():
@@ -30,7 +30,7 @@ def list_s3():
         for bucket in response['Buckets']:
             logging.info(f'  {bucket["Name"]}')
     except ClientError as e:
-        logging.error(e)
+        logging.error(traceback.format_exc())
         return False
     except Exception as e:
         logging.error(traceback.format_exc())

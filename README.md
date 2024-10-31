@@ -1,5 +1,9 @@
 # 24-2-mlops-project-car_object_detection
 
+## Introduction
+
+**TO DO**
+
 Dataset from:
 
 https://universe.roboflow.com/openglpro/stanford_car
@@ -8,24 +12,47 @@ I used the YOLOv8 dataset
 
 This dataset can detect both cars and bikes. I merged both train and test dataset using the script data/merge_train_test.py
 
-## Requirements
-- python-dotenv
-- dvc[s3]
-- requests
-- roboflow
-- boto3
-- ultralytics
+## Startup
+
+1. Install all the requirements with:
+
+```Bash
+pip install -r requirements.txt
+```
+
+Ensure Python version 3.10 is being used
 
 > [!WARNING]
 > If you would like to run with GPU, download CUDA Toolkit 12.6 https://developer.nvidia.com/cuda-downloads
 
-## .env file
+2. Create .env file in the root of the repository
+
+```Bash
 ROBOFLOW_API_KEY=""
 AWS_ACCESS_KEY_ID=""
 AWS_SECRET_ACCESS_KEY=""
 AWS_REGION=""
+```
+
+3. Add the following variables is the "Actions secrets and variables" section at settings
+
+![github env](./imgs/github_env.png)
+
+4. If necessary, you can create a S3 bucket for the model using the following command 
+
+```Bash
+python3 data/create_S3_bucket.py $bucket_name --model_bucket
+```
+
+This command will also save a variable in the .env file:
+
+```Bash
+BUCKET_MODEL="bucket name"
+```
 
 ## Steps for data versioning
+
+Data versioning is a essencial step in any Machine Learning project. 
 
 ### Create a new data enviroment
 
@@ -43,7 +70,7 @@ Ensure the tags were erased:
 
 ![tags_erased](./imgs/tags_erased.png)
 
-2. Also, remove the folder ".dvc/" and the files "data/data.zip.dvc" and ".dvcignore"
+2. Also, remove the folder ".dvc/" and the files "data/data.zip.dvc" and ".dvcignore", if it exists
 
 ```Bash
 rm -rf .dvc/ data/data.zip.dvc .dvcignore
@@ -80,7 +107,7 @@ chmod +x configure_dvc.sh
 
 After that,  you will have a tag v0.0.0 with the first version of the dataset!
 
-### Steps for creating new tag
+### Create a new dataset version using GitHub tag
 
 Everytime you want to create a new dataset version, run the steps bellow:
 
@@ -146,19 +173,7 @@ Do the following changes in settings.json:
 "runs_dir": "/home/user/your_path/24-2-mlops-project-car_object_detection/models/runs",
 ```
 
-3. Using the create_S3_bucket.py, create a S3 bucket for saving models and save the name in .env file:
-
-```Bash
-python3 data/create_S3_bucket.py $bucket_name --model_bucket
-```
-
-If you already have a bucket for models you can just set a variable in the .env file:
-
-```Bash
-BUCKET_MODEL="bucket name"
-```
-
-4. In the root folder of the repository, start Mlflow:
+3. In the root folder of the repository, start Mlflow:
 
 ```Bash
 mlflow ui --backend-store-uri ./runs/mlflow
@@ -171,10 +186,17 @@ mlflow ui --backend-store-uri ./runs/mlflow
 ```Bash
 cd src/
 
-python3 train.py
+python3 train.py --save_in_bucket
 ```
 
-6. Train again, changing hyperparameters if necessary.
+This command will train the model and also save the best.pt from the trained model inside the S3 bucket. It will erase the file best.pt if it exists in the bucket. 
+If you would like to use another YOLO model, you can run the following command (in the root of the repo):
+
+```Bash
+python3 add_model_S3.py --model_path /absolute_train_path/weights/best.pt
+```
+
+6. Train again, changing hyperparameters if necessary. you can also exclude the argument ```--save_in_bucket``` if you don't want to save it inside the bucket
 
 ![mlflow_working](./imgs/mlflow_working.png)
 

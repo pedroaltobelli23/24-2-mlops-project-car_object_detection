@@ -9,11 +9,11 @@ from botocore.exceptions import ClientError
 load_dotenv()
 
 logging.basicConfig(
+    format='%(asctime)s,%(msecs)03d %(levelname)-8s [%(filename)s:%(lineno)d] %(message)s',
+    datefmt='%Y-%m-%d:%H:%M:%S',
     level=logging.INFO,
-    format="%(asctime)-18s %(name)-8s %(levelname)-8s %(message)s",
-    datefmt="%y-%m-%d %H:%M",
     filename="logs/s3.log",
-    filemode="a",
+    filemode="a"
 )
 
 def delete_s3(bucket_name):

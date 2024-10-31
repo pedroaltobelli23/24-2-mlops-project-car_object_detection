@@ -8,11 +8,11 @@ import argparse
 import logging
 
 logging.basicConfig(
+    format='%(asctime)s,%(msecs)03d %(levelname)-8s [%(filename)s:%(lineno)d] %(message)s',
+    datefmt='%Y-%m-%d:%H:%M:%S',
     level=logging.INFO,
-    format="%(asctime)-18s %(name)-8s %(levelname)-8s %(message)s",
-    datefmt="%y-%m-%d %H:%M",
     filename="logs/s3.log",
-    filemode="a",
+    filemode="a"
 )
 
 print(find_dotenv())
@@ -25,7 +25,7 @@ def create_s3(bucket_name,save_model):
         bucket_name (str): Bucket to create
 
     Returns:
-        _type_: _description_
+        bool: True if the S3 was created
     """
     try:
         s3 = boto3.client(
@@ -40,9 +40,9 @@ def create_s3(bucket_name,save_model):
             CreateBucketConfiguration={"LocationConstraint": os.getenv("AWS_REGION")},
         )
         
-        logging.info("Bucker created")
+        logging.info(f"Bucket {bucket_name} created")
         
-        # Salva o nome do bucket em uma variavel dentro de .env
+        # Save name of the bucket inside .env variable
         if save_model:
             a = set_key(dotenv_path=find_dotenv(),key_to_set="BUCKET_MODEL",value_to_set=str(bucket_name))
             if a[0]:
