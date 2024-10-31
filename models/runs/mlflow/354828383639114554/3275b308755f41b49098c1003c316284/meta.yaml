@@ -1,0 +1,15 @@
+artifact_uri: file:///home/pedro/Documents/mlops/24-2-mlops-project-car_object_detection/src/../models/runs/mlflow/354828383639114554/3275b308755f41b49098c1003c316284/artifacts
+end_time: 1730318120921
+entry_point_name: ''
+experiment_id: '354828383639114554'
+lifecycle_stage: active
+run_id: 3275b308755f41b49098c1003c316284
+run_name: bemused-steed-287
+run_uuid: 3275b308755f41b49098c1003c316284
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1730318048323
+status: 3
+tags: []
+user_id: pedro

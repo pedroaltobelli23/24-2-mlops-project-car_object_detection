@@ -1,0 +1,15 @@
+artifact_uri: file:///home/pedro/Documents/mlops/24-2-mlops-project-car_object_detection/src/../models/runs/mlflow/354828383639114554/a8c3dbe876d24af39b603af65944948f/artifacts
+end_time: 1730295110917
+entry_point_name: ''
+experiment_id: '354828383639114554'
+lifecycle_stage: active
+run_id: a8c3dbe876d24af39b603af65944948f
+run_name: skittish-bass-40
+run_uuid: a8c3dbe876d24af39b603af65944948f
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1730295033290
+status: 3
+tags: []
+user_id: pedro

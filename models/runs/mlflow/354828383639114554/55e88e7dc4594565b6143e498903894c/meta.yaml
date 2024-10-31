@@ -1,0 +1,15 @@
+artifact_uri: file:///home/pedro/Documents/mlops/24-2-mlops-project-car_object_detection/src/../models/runs/mlflow/354828383639114554/55e88e7dc4594565b6143e498903894c/artifacts
+end_time: 1730297249864
+entry_point_name: ''
+experiment_id: '354828383639114554'
+lifecycle_stage: active
+run_id: 55e88e7dc4594565b6143e498903894c
+run_name: incongruous-steed-38
+run_uuid: 55e88e7dc4594565b6143e498903894c
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1730297170915
+status: 3
+tags: []
+user_id: pedro

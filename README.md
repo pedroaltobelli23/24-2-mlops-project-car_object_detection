@@ -19,6 +19,12 @@ This dataset can detect both cars and bikes. I merged both train and test datase
 > [!WARNING]
 > If you would like to run with GPU, download CUDA Toolkit 12.6 https://developer.nvidia.com/cuda-downloads
 
+## .env file
+ROBOFLOW_API_KEY=""
+AWS_ACCESS_KEY_ID=""
+AWS_SECRET_ACCESS_KEY=""
+AWS_REGION=""
+
 ## Steps for data versioning
 
 ### Create a new data enviroment
@@ -50,10 +56,10 @@ rm -rf .dvc/ data/data.zip.dvc .dvcignore
 python3 data/list_S3_buckets.py
 
 # Create S3 bucket
-python3 data/create_S3_bucket.py $bucket_name
+python3 data/create_S3_bucket.py --bucket_name $bucket_name
 
 # Delete S3 bucket
-python3 data/delete_S3_bucket.py $bucket_name
+python3 data/delete_S3_bucket.py --bucket_name $bucket_name
 ```
 
 4. Run data.sh to create the file "data/data.zip" with your preprocessed data. Drop value is the ratio of the dowloaded dataset that will be erased.
@@ -118,15 +124,41 @@ dvc checkout
 
 ## Steps for training
 
-### Using Mlflow for model tracking
-
 1. Unzip data using the command:
 
 ```Bash
 unzip data/data.zip
 ```
 
-2. In the root folder of the repository, start Mlflow:
+2. Inside the Ultralytics folder, change it so runs are saved in the models folder of this repository. 
+
+```Bash
+cd /home/user/.config/Ultralytics
+
+sudo vim settings.json
+```
+
+Do the following changes in settings.json:
+
+```Json
+"datasets_dir": "/home/user/your_path/24-2-mlops-project-car_object_detection",
+"weights_dir": "/home/user/your_path/24-2-mlops-project-car_object_detection/models/weights",
+"runs_dir": "/home/user/your_path/24-2-mlops-project-car_object_detection/models/runs",
+```
+
+3. Using the create_S3_bucket.py, create a S3 bucket for saving models and save the name in .env file:
+
+```Bash
+python3 data/create_S3_bucket.py $bucket_name --model_bucket
+```
+
+If you already have a bucket for models you can just set a variable in the .env file:
+
+```Bash
+BUCKET_MODEL="bucket name"
+```
+
+4. In the root folder of the repository, start Mlflow:
 
 ```Bash
 mlflow ui --backend-store-uri ./runs/mlflow
@@ -134,7 +166,7 @@ mlflow ui --backend-store-uri ./runs/mlflow
 
 ![empty_mlfow](./imgs/empty_mlflow.png)
 
-3. In another terminal, train model:
+5. In another terminal, train model:
 
 ```Bash
 cd src/
@@ -142,7 +174,10 @@ cd src/
 python3 train.py
 ```
 
-4. Train again, changing hyperparameters if necessary.
-
+6. Train again, changing hyperparameters if necessary.
 
 ![mlflow_working](./imgs/mlflow_working.png)
+
+7. All runs will be saved in ["models/runs"](./models/runs/)
+
+![mlflow_working_runs](./imgs/mlflow_working_runs.png)

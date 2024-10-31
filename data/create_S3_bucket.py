@@ -1,12 +1,11 @@
 import boto3
 import os
 import sys
-from dotenv import load_dotenv
+from dotenv import load_dotenv,find_dotenv, set_key
 import traceback
-import logging
 from botocore.exceptions import ClientError
-
-load_dotenv()
+import argparse
+import logging
 
 logging.basicConfig(
     level=logging.INFO,
@@ -16,7 +15,10 @@ logging.basicConfig(
     filemode="a",
 )
 
-def create_s3(bucket_name):
+print(find_dotenv())
+load_dotenv(find_dotenv())
+
+def create_s3(bucket_name,save_model):
     """Create a S3 bucket using the AWS account from .env file. Constrain S3 to a region. 
 
     Args:
@@ -37,13 +39,31 @@ def create_s3(bucket_name):
             Bucket=bucket_name,
             CreateBucketConfiguration={"LocationConstraint": os.getenv("AWS_REGION")},
         )
-
-        logging.info(f"Bucket {bucket_name} created")
+        
+        logging.info("Bucker created")
+        
+        # Salva o nome do bucket em uma variavel dentro de .env
+        if save_model:
+            a = set_key(dotenv_path=find_dotenv(),key_to_set="BUCKET_MODEL",value_to_set=str(bucket_name))
+            if a[0]:
+                logging.info(f"{a[1]}={a[2]}")
+            else:
+                logging.error("env not found.")
     except ClientError as e:
-        logging.error(e)
+        logging.error(traceback.format_exc())
         return False
     return True
 
 if __name__=="__main__":
-    user_input = str(sys.argv[1])
-    create_s3(user_input)
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--bucket_name", type=str, help="Name of the S3 bucket that will be created"
+    )
+    
+    parser.add_argument(
+        "--model_bucket", action="store_true", help="Name of the S3 bucket is saved in the .env file as BUCKET_MODEL"
+    )
+
+    args = parser.parse_args()
+
+    create_s3(args.bucket_name,args.model_bucket)
