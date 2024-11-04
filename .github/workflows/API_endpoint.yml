@@ -49,6 +49,7 @@ jobs:
             AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
             AWS_REGION: ${{ secrets.AWS_REGION }}
             AWS_LAMBDA_ROLE_ARN: ${{ secrets.AWS_LAMBDA_ROLE_ARN }}
+            BUCKET_MODEL: ${{secrets.BUCKET_MODEL}}
         steps:
           - name: Checkout code
             uses: actions/checkout@v4
