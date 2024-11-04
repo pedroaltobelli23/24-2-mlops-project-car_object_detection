@@ -23,4 +23,4 @@ jobs:
                 aws-region: ${{ secrets.AWS_REGION }}
             
             - name: Create ECR repository
-              run: aws ecr create-repository --repository-name "${{ secrets.ECR_NAME }}"" --image-scanning-configuration scanOnPush=true --image-tag-mutability MUTABLE --query 'repository.{repositoryArn:repositoryArn, repositoryUri:repositoryUri}'
+              run: aws ecr create-repository --repository-name "${{ secrets.ECR_NAME }}" --image-scanning-configuration scanOnPush=true --image-tag-mutability MUTABLE --query 'repository.{repositoryArn:repositoryArn, repositoryUri:repositoryUri}'
