@@ -1,5 +1,7 @@
 #!/bin/bash
 
+rm -rf .dvc/ data/data.zip.dvc .dvcignore
+
 BUCKET_NAME=$1
 
 if [ -z "$BUCKET_NAME" ]; then

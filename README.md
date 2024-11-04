@@ -20,7 +20,7 @@ This dataset can detect both cars and bikes. I merged both train and test datase
 pip install -r requirements.txt
 ```
 
-Ensure Python version 3.10 is being used
+Ensure Python version 3.12 is being used
 
 > [!WARNING]
 > If you would like to run with GPU, download CUDA Toolkit 12.6 https://developer.nvidia.com/cuda-downloads
@@ -32,18 +32,20 @@ ROBOFLOW_API_KEY=""
 AWS_ACCESS_KEY_ID=""
 AWS_SECRET_ACCESS_KEY=""
 AWS_REGION=""
+AWS_LAMBDA_ROLE_ARN=""
 ```
 
-3. Create a S3 bucket for the model using the following command 
+3. Create a S3 bucket for the model and another one for the dataset
 
 ```Bash
-python3 data/create_S3_bucket.py --bucket_name $bucket_name --model_bucket
+python3 data/s3_bucket.py --bucket_model bucket-model-name --bucket_dataset bucket-dataset-name
 ```
 
 This command will automatically save the bucket name in the .env file:
 
 ```Bash
-BUCKET_MODEL="bucket-name"
+BUCKET_MODEL="bucket-model-name"
+BUCKET_DATASET="bucket-dataset-name"
 ```
 
 4. Add the following variables is the "Actions secrets and variables" section at settings
@@ -70,39 +72,16 @@ git tag -d $(git tag -l)
 
 ![tags_erased](./imgs/tags_erased.png)
 
-2. Also, remove the folder ".dvc/" and the files "data/data.zip.dvc" and ".dvcignore", if it exists
+2. Run data.sh to create the file "data/data.zip" with your preprocessed data. Drop value is the ratio of the dowloaded dataset that will be erased.
 
 ```Bash
-rm -rf .dvc/ data/data.zip.dvc .dvcignore
-```
-
-3. Create S3 bucket to save dataset versions, and remove any S3 bucket if necessary.
-
-```Bash
-# List S3 buckets in the AWS account if necessary
-python3 data/list_S3_buckets.py
-
-# Create S3 bucket
-python3 data/create_S3_bucket.py --bucket_name $bucket_name
-
-# Delete S3 bucket
-python3 data/delete_S3_bucket.py --bucket_name $bucket_name
-```
-
-4. Run data.sh to create the file "data/data.zip" with your preprocessed data. Drop value is the ratio of the dowloaded dataset that will be erased.
-
-```Bash
-chmod +x ./scripts/data.sh
-
 ./scripts/data.sh <drop_value>
 ```
 
-5. Run configure_dvc.sh and pass as argument the recently created Bucket
+5. Run configure_dvc.sh and pass as argument the Bucket created for the dataset
 
 ```Bash
-chmod +x ./scripts/configure_dvc.sh
-
-./scrips/configure_dvc.sh <BUCKET>
+./scrips/configure_dvc.sh bucket-dataset-name
 ```
 
 After that,  you will have a tag v0.0.0 with the first version of the dataset!
@@ -114,7 +93,7 @@ Everytime you want to create a new dataset version, run the steps bellow:
 1. Do changes in the function prepocess from [preprocess.py](./data/preprocess.py). Then, run [data.sh](./data.sh):
 
 > [!WARNING]
-> Checkout if you are at main:
+> Check if you are at main:
 > ```Bash
 > git checkout main
 > ```
@@ -126,8 +105,6 @@ Everytime you want to create a new dataset version, run the steps bellow:
 2. Run script that create new data version:
 
 ```Bash
-chmod +x ./scripts/new_dataset_version.sh
-
 ./scripts/new_dataset_version.sh vA.B.C
 ```
 
@@ -178,10 +155,10 @@ cd src/
 python3 train.py
 ```
 
-This command will train the model and also save the best.onnx from the trained model inside the S3 bucket. It will erase the file best.onnx from the bucket if it already exists. If you would like to use another YOLO model, you can run the following command (in the root of the repo):
+This command will train the model and also save the best.onnx from the trained model inside the model S3 bucket. It will erase the file best.onnx from the bucket if it already exists. If you would like to use another YOLO model, you can run the following command (in the root of the repo):
 
 ```Bash
-python3 data/add_model_S3.py --model_path /absolute_train_path/weights/best.onnx
+python3 data/s3_bucket.py --file_path /absolute_train_path/weights/best.onnx
 ```
 
 5. Train again, changing hyperparameters if necessary.
@@ -194,5 +171,4 @@ python3 data/add_model_S3.py --model_path /absolute_train_path/weights/best.onnx
 
 ## Steps for deploying
 
-Steps:
-- Usando github actions, criar 
+For deploying the model do a git push to the main. Go to the section Actions in the repository to see all the details from the workflow

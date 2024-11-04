@@ -19,21 +19,13 @@ logging.basicConfig(
 load_dotenv(find_dotenv())
 
 def train_with_YOLO(hp : dict):
-    """Train YOLO using the stanford car dataset and save it inside S3 bucket
+    """Train YOLO using the Stanford car dataset and save it to an S3 bucket.
 
-    Args:
-        hp (dict): dict of hyperparameters. Here is an example:
-        {
-            "experiment_name":"test",
-            "epochs":1,
-            "batch":12,
-            "optimizer":"AdamW",
-            "imgsz":640,
-            "scale":0.5
-        }
+    :param hp: A dictionary of hyperparameters.
+    :type hp: dict
 
-    Returns:
-        bool: True if train was succesful and model saved inside S3 bucket
+    :return: True if training was successful and the model was saved in the S3 bucket, False otherwise.
+    :rtype: bool
     """
     
     try:
@@ -47,15 +39,6 @@ def train_with_YOLO(hp : dict):
         model_path = os.path.join(results.save_dir,"weights","best.onnx")
         
         model.export(format="onnx")
-        
-        # model_onnx = onnx.load(model_path)
-
-        # # Check and set the IR version
-        # if model_onnx.ir_version > 9:
-        #     model_onnx.ir_version = 9
-
-        # # Save the updated model
-        # onnx.save(model_onnx, model_path)
         
         logging.info(results)
         

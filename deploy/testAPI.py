@@ -16,7 +16,7 @@ def save_prediction(image_path):
 
 if __name__=="__main__":
     
-    url_endpoint = "https://pq0ezhnpfd.execute-api.us-east-2.amazonaws.com"
+    url_endpoint = "https://wltf24o71e.execute-api.us-east-2.amazonaws.com"
     url = f"{url_endpoint}/predict"
     
     save_prediction("test_images/img_1.jpg")

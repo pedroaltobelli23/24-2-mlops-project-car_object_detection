@@ -1,3 +1,3 @@
-2024-11-03:23:07:39,291 INFO     [create_S3_bucket.py:43] Bucket pedroatp-bucket-model44 created
-2024-11-03:23:07:39,294 INFO     [create_S3_bucket.py:49] BUCKET_MODEL=pedroatp-bucket-model44
-2024-11-03:23:17:16,668 INFO     [add_model_S3.py:53] Model saved in the bucket pedroatp-bucket-model44
+2024-11-04:19:19:04,789 INFO     [s3_bucket.py:81] File saved in the bucket pedroatp-bucket-model44
+2024-11-04:19:19:43,911 INFO     [s3_bucket.py:81] /home/pedro/Documents/mlops/24-2-mlops-project-car_object_detection/models/runs/detect/train/weights/best.onnx saved in the bucket pedroatp-bucket-model44 as model.onnx
+2024-11-04:19:20:23,587 INFO     [s3_bucket.py:48] Bucket pedroatp-bucket-model44 deleted
