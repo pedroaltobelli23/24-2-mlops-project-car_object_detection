@@ -3,7 +3,7 @@ import cv2
 import os
 
 def save_prediction(image_path):
-    data = open("test_images/img_2.jpg","rb").read()
+    data = open(image_path,"rb").read()
     resp = requests.post(url, data=data).json()["result"]
     
     img = cv2.imread(image_path)
@@ -16,7 +16,7 @@ def save_prediction(image_path):
 
 if __name__=="__main__":
     
-    url_endpoint = "https://q6vvrh22dk.execute-api.us-east-2.amazonaws.com"
+    url_endpoint = "https://nkhhw25z38.execute-api.us-east-2.amazonaws.com"
     url = f"{url_endpoint}/predict"
     
-    save_prediction("test_images/img_2.jpg")
+    save_prediction("test_images/img_1.jpg")
