@@ -1,3 +1,70 @@
 2024-11-04:19:19:04,789 INFO     [s3_bucket.py:81] File saved in the bucket pedroatp-bucket-model44
 2024-11-04:19:19:43,911 INFO     [s3_bucket.py:81] /home/pedro/Documents/mlops/24-2-mlops-project-car_object_detection/models/runs/detect/train/weights/best.onnx saved in the bucket pedroatp-bucket-model44 as model.onnx
 2024-11-04:19:20:23,587 INFO     [s3_bucket.py:48] Bucket pedroatp-bucket-model44 deleted
+2024-11-04:20:55:38,116 INFO     [s3_bucket.py:67] Bucket pedroatp-bucket-model45 deleted
+2024-11-04:20:56:35,305 INFO     [s3_bucket.py:30] model Bucket pedroatp-bucket-model45 created
+2024-11-04:20:56:35,306 INFO     [s3_bucket.py:48] BUCKET_MODEL=pedroatp-bucket-model45
+2024-11-04:20:56:35,943 ERROR    [s3_bucket.py:52] Traceback (most recent call last):
+  File "/home/pedro/Documents/mlops/24-2-mlops-project-car_object_detection/data/s3_bucket.py", line 25, in create_S3_bucket
+    self.s3.create_bucket(
+  File "/home/pedro/Documents/mlops/24-2-mlops-project-car_object_detection/env/lib/python3.12/site-packages/botocore/client.py", line 569, in _api_call
+    return self._make_api_call(operation_name, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pedro/Documents/mlops/24-2-mlops-project-car_object_detection/env/lib/python3.12/site-packages/botocore/client.py", line 1023, in _make_api_call
+    raise error_class(parsed_response, operation_name)
+botocore.errorfactory.BucketAlreadyOwnedByYou: An error occurred (BucketAlreadyOwnedByYou) when calling the CreateBucket operation: Your previous request to create the named bucket succeeded and you already own it.
+
+2024-11-04:20:56:35,944 ERROR    [s3_bucket.py:127] pedroatp-bucket-dataset45 not created
+2024-11-04:20:57:02,572 INFO     [s3_bucket.py:67] Bucket pedroatp-bucket-model45 deleted
+2024-11-04:20:57:10,279 INFO     [s3_bucket.py:67] Bucket pedroatp-bucket-dataset45 deleted
+2024-11-04:20:57:17,167 INFO     [s3_bucket.py:30] model Bucket pedroatp-bucket-model45 created
+2024-11-04:20:57:17,168 INFO     [s3_bucket.py:48] BUCKET_MODEL=pedroatp-bucket-model45
+2024-11-04:20:57:18,076 INFO     [s3_bucket.py:30] dataset Bucket pedroatp-bucket-dataset45 created
+2024-11-04:20:57:18,077 INFO     [s3_bucket.py:48] BUCKET_DATASET=pedroatp-bucket-dataset45
+2024-11-04:20:57:18,612 INFO     [s3_bucket.py:78]   aws-cloudtrail-logs-820926566402-9ca8cb23
+2024-11-04:20:57:18,612 INFO     [s3_bucket.py:78]   aws-emr-studio-820926566402-us-east-2
+2024-11-04:20:57:18,612 INFO     [s3_bucket.py:78]   aws-logs-820926566402-us-east-2
+2024-11-04:20:57:18,612 INFO     [s3_bucket.py:78]   aws-sam-cli-managed-default-samclisourcebucket-13pqm16grcy32
+2024-11-04:20:57:18,612 INFO     [s3_bucket.py:78]   bucket-mlops-predict-batch
+2024-11-04:20:57:18,612 INFO     [s3_bucket.py:78]   bucket-mlops-predict-online
+2024-11-04:20:57:18,612 INFO     [s3_bucket.py:78]   bucket-model-pedroatp
+2024-11-04:20:57:18,612 INFO     [s3_bucket.py:78]   bucket-model-pedroatp2
+2024-11-04:20:57:18,612 INFO     [s3_bucket.py:78]   bucket-model-pedroatp3
+2024-11-04:20:57:18,612 INFO     [s3_bucket.py:78]   bucket-model-pedroatp333
+2024-11-04:20:57:18,612 INFO     [s3_bucket.py:78]   bucket-model-pedroatp43
+2024-11-04:20:57:18,612 INFO     [s3_bucket.py:78]   bucket-model-pedroatp432
+2024-11-04:20:57:18,612 INFO     [s3_bucket.py:78]   bucket-model-pedroatp433
+2024-11-04:20:57:18,612 INFO     [s3_bucket.py:78]   bucket-project-mlops
+2024-11-04:20:57:18,612 INFO     [s3_bucket.py:78]   bucket-project-mlops-ricardomrf
+2024-11-04:20:57:18,612 INFO     [s3_bucket.py:78]   log-bucket-1-leticiacb1
+2024-11-04:20:57:18,612 INFO     [s3_bucket.py:78]   log-bucket-antonioaem
+2024-11-04:20:57:18,612 INFO     [s3_bucket.py:78]   log-bucket-eduardoarc
+2024-11-04:20:57:18,612 INFO     [s3_bucket.py:78]   log-bucket-felipec13
+2024-11-04:20:57:18,612 INFO     [s3_bucket.py:78]   log-bucket-giancarlovr
+2024-11-04:20:57:18,612 INFO     [s3_bucket.py:78]   log-bucket-hudsonma
+2024-11-04:20:57:18,612 INFO     [s3_bucket.py:78]   log-bucket-leticiacb1
+2024-11-04:20:57:18,612 INFO     [s3_bucket.py:78]   log-bucket-lorrancml
+2024-11-04:20:57:18,612 INFO     [s3_bucket.py:78]   log-bucket-paulohmf
+2024-11-04:20:57:18,612 INFO     [s3_bucket.py:78]   log-bucket-pedrosrvd
+2024-11-04:20:57:18,612 INFO     [s3_bucket.py:78]   log-bucket-renatex
+2024-11-04:20:57:18,612 INFO     [s3_bucket.py:78]   log-bucket-ricardomrf
+2024-11-04:20:57:18,612 INFO     [s3_bucket.py:78]   md-atv-armazenamento
+2024-11-04:20:57:18,612 INFO     [s3_bucket.py:78]   mlflow-exp-tracking-arthurfc2
+2024-11-04:20:57:18,612 INFO     [s3_bucket.py:78]   mlflow-exp-tracking-arthurmsb
+2024-11-04:20:57:18,612 INFO     [s3_bucket.py:78]   mlflow-exp-tracking-arthurmt1
+2024-11-04:20:57:18,612 INFO     [s3_bucket.py:78]   mlflow-exp-tracking-giancarlovr
+2024-11-04:20:57:18,612 INFO     [s3_bucket.py:78]   mlflow-exp-tracking-insper-hudsonma
+2024-11-04:20:57:18,612 INFO     [s3_bucket.py:78]   mlflow-exp-tracking-insper-username
+2024-11-04:20:57:18,612 INFO     [s3_bucket.py:78]   mlflow-exp-tracking-leticiacb1
+2024-11-04:20:57:18,612 INFO     [s3_bucket.py:78]   mlflow-exp-tracking-lorrancml
+2024-11-04:20:57:18,612 INFO     [s3_bucket.py:78]   mlflow-exp-tracking-lucianofd
+2024-11-04:20:57:18,612 INFO     [s3_bucket.py:78]   mlflow-exp-tracking-paulohmf
+2024-11-04:20:57:18,612 INFO     [s3_bucket.py:78]   mlflow-exp-tracking-renatolf1
+2024-11-04:20:57:18,612 INFO     [s3_bucket.py:78]   mlflow-exp-tracking-rodrigoap8
+2024-11-04:20:57:18,613 INFO     [s3_bucket.py:78]   mlops-dvc-felipec13
+2024-11-04:20:57:18,613 INFO     [s3_bucket.py:78]   my-log-bucket-1
+2024-11-04:20:57:18,613 INFO     [s3_bucket.py:78]   news-data-lambda
+2024-11-04:20:57:18,613 INFO     [s3_bucket.py:78]   pedroatp-bucket-dataset45
+2024-11-04:20:57:18,613 INFO     [s3_bucket.py:78]   pedroatp-bucket-model45
+2024-11-04:20:57:18,613 INFO     [s3_bucket.py:78]   sagemaker-mlops-out-rodrigoap8
+2024-11-04:20:57:18,613 INFO     [s3_bucket.py:78]   tf-states-amigos-do-brito

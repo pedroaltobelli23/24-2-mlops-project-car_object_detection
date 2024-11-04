@@ -58,6 +58,7 @@ def make_prediction(event, context):
             )
             
             bucket_name = os.getenv("BUCKET_MODEL")
+            print(f"Bucket: {bucket_name}")
             s3.download_file(bucket_name, 'model.onnx', model_path)
         
         so = ort.SessionOptions()
