@@ -41,7 +41,7 @@ jobs:
                 docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG --platform linux/amd64 -f deploy/Dockerfile .
                 docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
             
-    Create-Lambda-Function:
+    Create-API-Endpoint:
         runs-on: ubuntu-latest
         needs: Amazon-ECR-Image
         env:
@@ -64,6 +64,8 @@ jobs:
 
           - name: Create lambda
             run: python deploy/createLambdaFunc.py --image_uri ${{secrets.AWS_ACCOUNT_ID}}.dkr.ecr.${{secrets.AWS_REGION}}.amazonaws.com/${{secrets.ECR_NAME}}:latest
-
+          
+          - name: Create Endpoint
+            run: python deploy/createAPI.py --lambda_function lambda-project-pedroatp --api_gateway demo_project_pedroatp
 
           
