@@ -4,7 +4,8 @@ import os
 
 def save_prediction(image_path):
     data = open(image_path,"rb").read()
-    resp = requests.post(url, data=data).json()["result"]
+    resp = requests.post(url, data=data).json()
+    print(resp)
     
     img = cv2.imread(image_path)
     cv2.rectangle(img,(resp["x1"],resp["y1"]),(resp["x2"],resp["y2"]),color=(0, 0, 255),thickness=10)
@@ -16,7 +17,7 @@ def save_prediction(image_path):
 
 if __name__=="__main__":
     
-    url_endpoint = "https://wltf24o71e.execute-api.us-east-2.amazonaws.com"
+    url_endpoint = "https://x6bth1tqvb.execute-api.us-east-2.amazonaws.com"
     url = f"{url_endpoint}/predict"
     
     save_prediction("test_images/img_1.jpg")
