@@ -1,8 +1,2 @@
-24-10-31 13:25     root     ERROR    Traceback (most recent call last):
-  File "/home/pedro/Documents/mlops/24-2-mlops-project-car_object_detection/data/add_model_S3.py", line 48, in add_model
-    raise Exception(f"{model_path} isn't a .pt (Place-Text) file")
-Exception: /home/pedro/Documents/mlops/24-2-mlops-project-car_object_detection/models/runs/detect/train9/args.yaml isn't a .pt (Place-Text) file
-
-24-10-31 13:30     root     ERROR    /home/pedro/Documents/mlops/24-2-mlops-project-car_object_detection/models/runs/detect/train9/args.yaml isn't a .pt (Place-Text) file
-24-10-31 13:51     root     INFO     Model saved in the bucket bucket-model-pedroatp333
-2024-10-31:14:13:17,898 INFO     [add_model_S3.py:53] Model saved in the bucket bucket-model-pedroatp333
+2024-11-01:10:52:57,609 ERROR    [add_model_S3.py:47] /home/pedro/Documents/mlops/24-2-mlops-project-car_object_detection/models/runs/detect/train2/weights/best.onnx isn't a .pt (Place-Text) file
+2024-11-01:10:53:45,463 INFO     [add_model_S3.py:53] Model saved in the bucket bucket-model-pedroatp333

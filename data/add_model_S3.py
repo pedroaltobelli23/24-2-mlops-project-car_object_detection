@@ -27,10 +27,10 @@ def add_model(model_path):
         bool: True if the model was uploaded, else False
     """
     
-    object_name = "model.pt"
+    object_name = "model.onnx"
     
     try:
-        if model_path.endswith(".pt"):
+        if model_path.endswith(".onnx"):
             s3 = boto3.client(
                 "s3",
                 aws_access_key_id=os.getenv("AWS_ACCESS_KEY_ID"),
@@ -44,7 +44,7 @@ def add_model(model_path):
                 object_name,
             )
         else:
-            logging.error(f"{model_path} isn't a .pt (Place-Text) file")
+            logging.error(f"{model_path} isn't a .onnx (Place-Text) file")
             return False
     except Exception as e:
         logging.error(traceback.format_exc())

@@ -1,0 +1,15 @@
+artifact_uri: file:///home/pedro/Documents/mlops/24-2-mlops-project-car_object_detection/src/../models/runs/mlflow/997155394632420059/34dc685d3afb45a2b5f9b72e06aaeac2/artifacts
+end_time: 1730468491613
+entry_point_name: ''
+experiment_id: '997155394632420059'
+lifecycle_stage: active
+run_id: 34dc685d3afb45a2b5f9b72e06aaeac2
+run_name: clean-hawk-710
+run_uuid: 34dc685d3afb45a2b5f9b72e06aaeac2
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1730468421293
+status: 3
+tags: []
+user_id: pedro

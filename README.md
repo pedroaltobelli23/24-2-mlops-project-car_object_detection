@@ -34,25 +34,25 @@ AWS_SECRET_ACCESS_KEY=""
 AWS_REGION=""
 ```
 
-3. Add the following variables is the "Actions secrets and variables" section at settings
-
-![github env](./imgs/github_env.png)
-
-4. If necessary, you can create a S3 bucket for the model using the following command 
+3. Create a S3 bucket for the model using the following command 
 
 ```Bash
 python3 data/create_S3_bucket.py $bucket_name --model_bucket
 ```
 
-This command will also save a variable in the .env file:
+This command will automatically save the bucket name in the .env file:
 
 ```Bash
-BUCKET_MODEL="bucket name"
+BUCKET_MODEL="bucket-name"
 ```
+
+4. Add the following variables is the "Actions secrets and variables" section at settings
+
+![github env](./imgs/github_env.png)
 
 ## Steps for data versioning
 
-Data versioning is a essencial step in any Machine Learning project. 
+Data versioning is a essencial step in any Machine Learning projects. It enables developer's teams to create multiple datasets and easily change between them when training. It is useful when the team have a lot of data and is trying to use only the samples that increase model performance. In this project [dvc](https://dvc.org/doc/api-reference) combined with git is used to implement this task. All datasets versions are stored at a S3 bucket.
 
 ### Create a new data enviroment
 
@@ -66,7 +66,7 @@ git push origin --delete $(git tag -l)
 git tag -d $(git tag -l)
 ```
 
-Ensure the tags were erased:
+- Ensure the tags were erased:
 
 ![tags_erased](./imgs/tags_erased.png)
 
@@ -92,22 +92,22 @@ python3 data/delete_S3_bucket.py --bucket_name $bucket_name
 4. Run data.sh to create the file "data/data.zip" with your preprocessed data. Drop value is the ratio of the dowloaded dataset that will be erased.
 
 ```Bash
-chmod +x data.sh
+chmod +x ./scripts/data.sh
 
-./data.sh <drop_value>
+./scripts/data.sh <drop_value>
 ```
 
 5. Run configure_dvc.sh and pass as argument the recently created Bucket
 
 ```Bash
-chmod +x configure_dvc.sh
+chmod +x ./scripts/configure_dvc.sh
 
-./configure_dvc.sh <BUCKET>
+./scrips/configure_dvc.sh <BUCKET>
 ```
 
 After that,  you will have a tag v0.0.0 with the first version of the dataset!
 
-### Create a new dataset version using GitHub tag
+### Create a new dataset version
 
 Everytime you want to create a new dataset version, run the steps bellow:
 
@@ -120,26 +120,15 @@ Everytime you want to create a new dataset version, run the steps bellow:
 > ```
 
 ```Bash
-./data.sh
+./scrips/data.sh <drop_value>
 ```
 
-2. Run the following commands:
+2. Run script that create new data version:
 
 ```Bash
-dvc commit data/data.zip
-dvc push
+chmod +x ./scripts/new_dataset_version.sh
 
-git add .
-git commit -m "version vA.B.C"
-git push
-
-git tag -a vA.B.C -m "Release version A.B.C"
-```
-
-3. To save tag in remote repo:
-
-```Bash
-git push origin tag vA.B.C
+./scripts/new_dataset_version.sh vA.B.C
 ```
 
 3. To use a specific data version:
@@ -181,25 +170,29 @@ mlflow ui --backend-store-uri ./runs/mlflow
 
 ![empty_mlfow](./imgs/empty_mlflow.png)
 
-5. In another terminal, train model:
+4. In another terminal, train model:
 
 ```Bash
 cd src/
 
-python3 train.py --save_in_bucket
+python3 train.py
 ```
 
-This command will train the model and also save the best.pt from the trained model inside the S3 bucket. It will erase the file best.pt if it exists in the bucket. 
-If you would like to use another YOLO model, you can run the following command (in the root of the repo):
+This command will train the model and also save the best.onnx from the trained model inside the S3 bucket. It will erase the file best.onnx from the bucket if it already exists. If you would like to use another YOLO model, you can run the following command (in the root of the repo):
 
 ```Bash
-python3 add_model_S3.py --model_path /absolute_train_path/weights/best.pt
+python3 data/add_model_S3.py --model_path /absolute_train_path/weights/best.onnx
 ```
 
-6. Train again, changing hyperparameters if necessary. you can also exclude the argument ```--save_in_bucket``` if you don't want to save it inside the bucket
+5. Train again, changing hyperparameters if necessary.
 
 ![mlflow_working](./imgs/mlflow_working.png)
 
-7. All runs will be saved in ["models/runs"](./models/runs/)
+6. All runs will be saved in ["models/runs"](./models/runs/)
 
 ![mlflow_working_runs](./imgs/mlflow_working_runs.png)
+
+## Steps for deploying
+
+Steps:
+- Usando github actions, criar 

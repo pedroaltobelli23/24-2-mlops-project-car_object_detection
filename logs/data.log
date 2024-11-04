@@ -1,19 +1,7 @@
-2024-10-28:22:22:05,224 INFO     [data_install.py:39] Downloading dataset...
-2024-10-28:22:22:45,349 INFO     [data_install.py:41] Dataset downloaded in data/.
-2024-10-28:22:22:45,714 INFO     [preprocess.py:103] Starting preprocess...
-2024-10-28:22:22:45,769 INFO     [preprocess.py:63] Removed test directory: data/data/test
-2024-10-28:22:22:45,769 INFO     [preprocess.py:117] Drop used: 0.5
-2024-10-28:22:22:46,231 INFO     [preprocess.py:95] Dropped 13912/27825 from data/data/train
-2024-10-28:22:22:46,269 INFO     [preprocess.py:95] Dropped 1264/2529 from data/data/valid
-2024-10-28:22:22:46,269 INFO     [preprocess.py:120] Preprocessing complete.
-2024-10-28:22:25:08,646 INFO     [data_install.py:39] Downloading dataset...
-2024-10-28:22:25:49,313 INFO     [data_install.py:41] Dataset downloaded in data/.
-2024-10-28:22:25:49,665 INFO     [preprocess.py:103] Starting preprocess...
-2024-10-28:22:41:54,214 INFO     [data_install.py:39] Downloading dataset...
-2024-10-28:22:42:33,829 INFO     [data_install.py:41] Dataset downloaded in data/.
-2024-10-28:22:42:34,234 INFO     [preprocess.py:103] Starting preprocess...
-2024-10-28:22:42:34,294 INFO     [preprocess.py:63] Removed test directory: data/data/test
-2024-10-28:22:42:34,295 INFO     [preprocess.py:117] Drop used: 0.8
-2024-10-28:22:42:35,219 INFO     [preprocess.py:95] Dropped 22260/27825 from data/data/train
-2024-10-28:22:42:35,279 INFO     [preprocess.py:95] Dropped 2023/2529 from data/data/valid
-2024-10-28:22:42:35,279 INFO     [preprocess.py:120] Preprocessing complete.
+2024-11-01:10:17:23,883 INFO     [data_install.py:37] Downloading dataset...
+2024-11-01:10:18:06,140 INFO     [data_install.py:39] Dataset downloaded in data/.
+2024-11-01:10:18:06,706 INFO     [preprocess.py:105] Starting preprocess...
+2024-11-01:10:18:06,766 INFO     [preprocess.py:119] Drop used: 0.8
+2024-11-01:10:18:07,403 INFO     [preprocess.py:97] Dropped 22260/27825 images from data/data/train
+2024-11-01:10:18:07,457 INFO     [preprocess.py:97] Dropped 2023/2529 images from data/data/valid
+2024-11-01:10:18:07,457 INFO     [preprocess.py:122] Preprocessing complete.

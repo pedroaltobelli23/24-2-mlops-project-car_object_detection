@@ -7,6 +7,7 @@ import boto3
 from botocore.exceptions import ClientError
 import logging
 import traceback
+import onnx
 
 logging.basicConfig(
     format='%(asctime)s,%(msecs)03d %(levelname)-8s [%(filename)s:%(lineno)d] %(message)s',
@@ -42,9 +43,20 @@ def train_with_YOLO(hp : dict):
         with mlflow.start_run():
             mlflow.log_params(hp)
             results = model.train(data="config.yaml", epochs=hp["epochs"],imgsz=hp['imgsz'],scale=hp['scale'],batch=hp['batch'],optimizer=hp['optimizer'], amp=False)
-        logging.info("Model finished running")        
-        object_name = "model.pt"
-        model_path = os.path.join(results.save_dir,"weights","best.pt")
+        logging.info("Model finished running")     
+        object_name = "model.onnx"
+        model_path = os.path.join(results.save_dir,"weights","best.onnx")
+        
+        model.export(format="onnx")
+        
+        model_onnx = onnx.load(model_path)
+
+        # Check and set the IR version
+        if model_onnx.ir_version > 9:
+            model_onnx.ir_version = 9
+
+        # Save the updated model
+        onnx.save(model_onnx, model_path)
         
         logging.info(results)
         
@@ -70,7 +82,7 @@ def train_with_YOLO(hp : dict):
 
 if __name__=="__main__":
     try:
-        hiper_parameters = {"experiment_name":"training","epochs":1,"batch":8,"optimizer":"SGD","imgsz":420,"scale":0.5}
+        hiper_parameters = {"experiment_name":"training","epochs":1,"batch":12,"optimizer":"SGD","imgsz":448,"scale":0.5}
     
         model = YOLO("yolov8n.pt")
     
