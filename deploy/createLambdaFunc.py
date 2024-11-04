@@ -50,6 +50,6 @@ if __name__=="__main__":
     )
 
     args = parser.parse_args()
-    image_uri = "ID.dkr.ecr.REGION.amazonaws.com/mlops-pedroatp-projeto3:latest"
+    # image_uri = "820926566402.dkr.ecr.us-east-2.amazonaws.com/mlops-pedroatp-projeto60:latest"
 
     create_lambda_function(image_uri=args.image_uri)
