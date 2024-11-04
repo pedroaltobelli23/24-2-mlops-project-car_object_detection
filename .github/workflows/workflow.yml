@@ -60,12 +60,9 @@ jobs:
               python-version: '3.12'
 
           - name: Install dependencies
-            run: pip install -r deploy/create_lambda_requirements.txt
+            run: pip install -r deploy/requirements/create_lambda_requirements.txt
 
-          - name: Create lambda
-            run: python deploy/createLambdaFunc.py --image_uri ${{secrets.AWS_ACCOUNT_ID}}.dkr.ecr.${{secrets.AWS_REGION}}.amazonaws.com/${{secrets.ECR_NAME}}:latest
-          
           - name: Create Endpoint
-            run: python deploy/createAPI.py --lambda_function lambda-project-pedroatp --api_gateway demo_project_pedroatp
+            run: python deploy/deploy_API.py --image_uri ${{secrets.AWS_ACCOUNT_ID}}.dkr.ecr.${{secrets.AWS_REGION}}.amazonaws.com/${{secrets.ECR_NAME}}:latest --api_gateway demo_project_pedroatp
 
           

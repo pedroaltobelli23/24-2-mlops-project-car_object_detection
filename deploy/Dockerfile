@@ -1,7 +1,7 @@
 FROM public.ecr.aws/lambda/python:3.12
 
 # Copy requirements.txt
-COPY deploy/deploy_requirements.txt ${LAMBDA_TASK_ROOT}
+COPY deploy/requirements/deploy_requirements.txt ${LAMBDA_TASK_ROOT}
 
 # Copy function code
 COPY deploy/lambda_function.py ${LAMBDA_TASK_ROOT}

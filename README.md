@@ -35,7 +35,7 @@ AWS_REGION=""
 AWS_LAMBDA_ROLE_ARN=""
 ```
 
-3. Create a S3 bucket for the model and another one for the dataset
+3. Create a S3 bucket one bucket to store the ONNX model and another one to store all the datasets from the data versioning
 
 ```Bash
 python3 data/s3_bucket.py --bucket_model bucket-model-name --bucket_dataset bucket-dataset-name
@@ -51,6 +51,12 @@ BUCKET_DATASET="bucket-dataset-name"
 4. Add the following variables is the "Actions secrets and variables" section at settings
 
 ![github env](./imgs/github_env.png)
+
+> [!INFO]
+> 
+> ```ECR_NAME``` is the name of the ECR container
+> ```BUCKET_MODEL``` is the name of the bucket were the model is stored
+> 
 
 ## Steps for data versioning
 
@@ -142,7 +148,7 @@ Do the following changes in settings.json:
 3. In the root folder of the repository, start Mlflow:
 
 ```Bash
-mlflow ui --backend-store-uri ./runs/mlflow
+mlflow ui --backend-store-uri ./models/runs/mlflow
 ```
 
 ![empty_mlfow](./imgs/empty_mlflow.png)
