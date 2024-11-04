@@ -1,5 +1,5 @@
 #!/bin/bash
-export URI="820926566402.dkr.ecr.us-east-2.amazonaws.com/mlops-pedroatp-projeto"
+export URI="820926566402.dkr.ecr.us-east-2.amazonaws.com/mlops-pedroatp-projeto3"
 
 aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 820926566402.dkr.ecr.us-east-2.amazonaws.com
 

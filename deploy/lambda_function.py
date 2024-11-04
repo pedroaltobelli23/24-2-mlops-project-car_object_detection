@@ -9,41 +9,9 @@ from PIL import Image
 import base64
 from io import BytesIO
 import json
+import sys
 
 load_dotenv()
-
-def startup_event():    
-    """Download model.onnx that is inside S3 bucket and load the model. If it is already dowloaded, just load the model.
-
-    Returns:
-        InferenceSession: onnx model. more information in https://onnxruntime.ai/
-    """
-    
-    model = None
-   
-
-    model_path = os.path.join("/tmp", "model.onnx")
-        
-    # Dowload file from S3 if not dowloaded it in the docker
-    if not os.path.exists(model_path):
-    
-        s3 = boto3.client(
-            "s3",
-            aws_access_key_id=os.getenv("ACCESS_KEY_ID"),
-            aws_secret_access_key=os.getenv("SECRET_ACCESS_KEY"),
-            region_name=os.getenv("REGION"),
-        )
-        
-        bucket_name = os.getenv("BUCKET_MODEL")
-        s3.download_file(bucket_name, 'model.onnx', model_path)
-        
-            
-    model = ort.InferenceSession(model_path, providers=['CPUExecutionProvider'])
-    model_input = model.get_inputs()
-    img_sz = model_input[0].shape[-1] 
-        
-    return model, img_sz
-
 
 def intersection(box1,box2):
     box1_x1,box1_y1,box1_x2,box1_y2 = box1[:4]
@@ -67,27 +35,38 @@ def iou(box1,box2):
 
 def make_prediction(event, context):
     try:
-        img_b64dec = base64.b64decode(event["body"])
-        img_byteIO = BytesIO(img_b64dec)
-        img = Image.open(img_byteIO)
+        print("Python version")
+        print(sys.version)
+        print("Version info.")
+        print(sys.version_info)
         
-        model_path = os.path.join("/tmp", "model.onnx")
+        img_B = event["body"].encode("utf-8")
+        img_b64 = base64.b64decode(img_B)
+        img = Image.open(BytesIO(img_b64))
         
-        # Dowload file from S3 if not dowloaded it in the docker
-        if not os.path.exists(model_path):
+        print("Downloading model")
+        s3 = boto3.client(
+            "s3",
+            aws_access_key_id=os.getenv("ACCESS_KEY_ID"),
+            aws_secret_access_key=os.getenv("SECRET_ACCESS_KEY"),
+            region_name=os.getenv("REGION"),
+        )
         
-            s3 = boto3.client(
-                "s3",
-                aws_access_key_id=os.getenv("ACCESS_KEY_ID"),
-                aws_secret_access_key=os.getenv("SECRET_ACCESS_KEY"),
-                region_name=os.getenv("REGION"),
-            )
-            
-            bucket_name = os.getenv("BUCKET_MODEL")
-            s3.download_file(bucket_name, 'model.onnx', model_path)
-  
-        model = ort.InferenceSession(model_path, providers=['CPUExecutionProvider'])
+        obj = s3.get_object(
+            Bucket=os.getenv("BUCKET_MODEL"),
+            Key="model.onnx",
+        )
+        
+        model_file = BytesIO(obj["Body"].read())
+        
+        so = ort.SessionOptions()
+        so.log_severity_level = 3
+        
+        model = ort.InferenceSession(model_file.read(), sess_options=so)
+        
+        
         model_input = model.get_inputs()
+        
         img_sz = model_input[0].shape[-1]
     
         img = img.resize((img_sz,img_sz))
@@ -96,11 +75,12 @@ def make_prediction(event, context):
         inputer = np.array(img) / 255.0
         inputer = inputer.transpose(2, 0, 1)
         inputer = inputer.reshape(1, 3, img_sz, img_sz).astype(np.float32)
+        
+        ort_inputs = {model.get_inputs()[0].name: inputer}
+        
+        print("Inference started...")
+        outputs = model.run(None, ort_inputs)
 
-        outputs = model.run(["output0"], {"images":inputer})
-
-        return {"result":"foi"}
-    
         output = outputs[0].astype(float)
         output = output.transpose()
 
@@ -139,10 +119,18 @@ def make_prediction(event, context):
             confidence = float(res[5])
             
             result_dict[i] = {"x1":x1,"y1":y1,"x2":x2,"y2":y2,"class":m_class,"confidence":confidence}
+            print(f"Detection {i}:")
+            print(f"Class: {m_class}")
+            print(f"Confidence (%): {confidence}")
+            print(f"Point 1: ({x1},{y1})")
+            print(f"Point 2: ({x2},{y2})")
+            print("\n")
         
-        confidence_first_detect = str(result_dict[0]["confidence"])
-        
-        return {"result":"end"}
+        if len(result_dict)>0:
+            return {"result":result_dict[0]}
+        else:
+            print(f"No detections found in the image.")
+            return {"result":None}
     except Exception as e:
         error = traceback.format_exc()
-        return {"error":str(error)+str(sys.version)}
+        return {"error":str(error)}

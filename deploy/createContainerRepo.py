@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Provide a name like test1-mlops-<INSPER_USERNAME>
-repository_name = "mlops-pedroatp-projeto2"
+repository_name = "mlops-pedroatp-projeto3"
 
 # Create a Boto3 client for ECR
 ecr_client = boto3.client(

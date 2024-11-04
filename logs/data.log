@@ -1,7 +1,7 @@
-2024-11-01:10:17:23,883 INFO     [data_install.py:37] Downloading dataset...
-2024-11-01:10:18:06,140 INFO     [data_install.py:39] Dataset downloaded in data/.
-2024-11-01:10:18:06,706 INFO     [preprocess.py:105] Starting preprocess...
-2024-11-01:10:18:06,766 INFO     [preprocess.py:119] Drop used: 0.8
-2024-11-01:10:18:07,403 INFO     [preprocess.py:97] Dropped 22260/27825 images from data/data/train
-2024-11-01:10:18:07,457 INFO     [preprocess.py:97] Dropped 2023/2529 images from data/data/valid
-2024-11-01:10:18:07,457 INFO     [preprocess.py:122] Preprocessing complete.
+2024-11-03:23:08:55,576 INFO     [data_install.py:37] Downloading dataset...
+2024-11-03:23:09:41,718 INFO     [data_install.py:39] Dataset downloaded in data/.
+2024-11-03:23:09:42,193 INFO     [preprocess.py:105] Starting preprocess...
+2024-11-03:23:09:42,283 INFO     [preprocess.py:119] Drop used: 0.8
+2024-11-03:23:09:43,236 INFO     [preprocess.py:97] Dropped 22260/27825 images from data/data/train
+2024-11-03:23:09:43,295 INFO     [preprocess.py:97] Dropped 2023/2529 images from data/data/valid
+2024-11-03:23:09:43,296 INFO     [preprocess.py:122] Preprocessing complete.

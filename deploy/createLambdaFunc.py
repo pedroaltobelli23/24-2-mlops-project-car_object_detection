@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-image_uri = "820926566402.dkr.ecr.us-east-2.amazonaws.com/mlops-pedroatp-projeto:latest"
+image_uri = "820926566402.dkr.ecr.us-east-2.amazonaws.com/mlops-pedroatp-projeto3:latest"
 
 function_name="lambda-project-pedroatp"
 
@@ -29,7 +29,7 @@ response = lambda_client.create_function(
     PackageType="Image",
     Code={"ImageUri": image_uri},
     Role=lambda_role_arn,
-    Timeout=120,  # Optional: function timeout in seconds
+    Timeout=900,  # Optional: function timeout in seconds
     MemorySize=512,  # Optional: function memory size in megabytes
     Environment = {
         "Variables": {

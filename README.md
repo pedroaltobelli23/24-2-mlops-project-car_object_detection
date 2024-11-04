@@ -37,7 +37,7 @@ AWS_REGION=""
 3. Create a S3 bucket for the model using the following command 
 
 ```Bash
-python3 data/create_S3_bucket.py $bucket_name --model_bucket
+python3 data/create_S3_bucket.py --bucket_name $bucket_name --model_bucket
 ```
 
 This command will automatically save the bucket name in the .env file:
