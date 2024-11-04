@@ -68,3 +68,4 @@ botocore.errorfactory.BucketAlreadyOwnedByYou: An error occurred (BucketAlreadyO
 2024-11-04:20:57:18,613 INFO     [s3_bucket.py:78]   pedroatp-bucket-model45
 2024-11-04:20:57:18,613 INFO     [s3_bucket.py:78]   sagemaker-mlops-out-rodrigoap8
 2024-11-04:20:57:18,613 INFO     [s3_bucket.py:78]   tf-states-amigos-do-brito
+2024-11-04:20:59:31,085 INFO     [s3_bucket.py:100] /home/pedro/Documents/mlops/24-2-mlops-project-car_object_detection/models/runs/detect/train/weights/best.onnx saved in the bucket pedroatp-bucket-model45 as model.onnx
