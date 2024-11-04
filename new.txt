@@ -1,5 +1,0 @@
-Traceback (most recent call last):
-  File "/var/task/lambda_function.py", line 74, in make_prediction
-    img = Image.open(BytesIO(base64.b64decode(raw_json['image'])))
-TypeError: string indices must be integers
-3.10.15 (main, Oct  9 2024, 13:52:11) [GCC 7.3.1 20180712 (Red Hat 7.3.1-17)]

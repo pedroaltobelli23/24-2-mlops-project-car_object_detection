@@ -45,33 +45,34 @@ def make_prediction(event, context):
         img = Image.open(BytesIO(img_b64))
         
         print("Downloading model")
-        s3 = boto3.client(
-            "s3",
-            aws_access_key_id=os.getenv("ACCESS_KEY_ID"),
-            aws_secret_access_key=os.getenv("SECRET_ACCESS_KEY"),
-            region_name=os.getenv("REGION"),
-        )
+        model_path = os.path.join("/tmp", "model.onnx")
         
-        obj = s3.get_object(
-            Bucket=os.getenv("BUCKET_MODEL"),
-            Key="model.onnx",
-        )
+        # Dowload file from S3 if not dowloaded it in the docker
+        if not os.path.exists(model_path):
         
-        model_file = BytesIO(obj["Body"].read())
+            s3 = boto3.client(
+                "s3",
+                aws_access_key_id=os.getenv("ACCESS_KEY_ID"),
+                aws_secret_access_key=os.getenv("SECRET_ACCESS_KEY"),
+                region_name=os.getenv("REGION"),
+            )
+            
+            bucket_name = os.getenv("BUCKET_MODEL")
+            s3.download_file(bucket_name, 'model.onnx', model_path)
         
         so = ort.SessionOptions()
         so.log_severity_level = 3
         
-        model = ort.InferenceSession(model_file.read(), sess_options=so)
+        model = ort.InferenceSession(model_path, sess_options=so)
         
         
         model_input = model.get_inputs()
         
         img_sz = model_input[0].shape[-1]
     
+        img_width, img_height = img.size
         img = img.resize((img_sz,img_sz))
         img = img.convert("RGB")
-        img_width, img_height = img.size
         inputer = np.array(img) / 255.0
         inputer = inputer.transpose(2, 0, 1)
         inputer = inputer.reshape(1, 3, img_sz, img_sz).astype(np.float32)

@@ -29,8 +29,8 @@ response = lambda_client.create_function(
     PackageType="Image",
     Code={"ImageUri": image_uri},
     Role=lambda_role_arn,
-    Timeout=900,  # Optional: function timeout in seconds
-    MemorySize=512,  # Optional: function memory size in megabytes
+    Timeout=900,
+    MemorySize=512,
     Environment = {
         "Variables": {
             "BUCKET_MODEL": os.getenv("BUCKET_MODEL"),
