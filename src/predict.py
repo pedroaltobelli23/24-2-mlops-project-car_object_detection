@@ -1,5 +1,4 @@
 import requests
-import cv2
 import os
 
 def make_predictions(endpoint,image_path):
