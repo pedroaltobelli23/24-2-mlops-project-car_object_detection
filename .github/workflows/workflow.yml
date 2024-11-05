@@ -68,7 +68,7 @@ jobs:
             id: create_endpoint
             run: |
               endpoint=$(python deploy/deploy_API.py --image_uri ${{secrets.AWS_ACCOUNT_ID}}.dkr.ecr.${{secrets.AWS_REGION}}.amazonaws.com/${{secrets.ECR_NAME}}:latest --api_gateway demo_project_pedroatp)
-              echo "api_endpoint=$endpoint" >> "$GITHUB_OUTPUT"
+              echo "api_endpoint=test" >> "$GITHUB_OUTPUT"
     Run-Tests:
       runs-on: ubuntu-latest
       needs: Create-API-Endpoint
