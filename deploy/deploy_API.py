@@ -51,9 +51,9 @@ class Deployment:
                 },
             )
 
-            print("Lambda function created successfully:")
-            print(f"Function Name: {response['FunctionName']}")
-            print(f"Function ARN: {response['FunctionArn']}")
+            # print("Lambda function created successfully:")
+            # print(f"Function Name: {response['FunctionName']}")
+            # print(f"Function ARN: {response['FunctionArn']}")
         except Exception as e:
             print(traceback.format_exc())
             return False
