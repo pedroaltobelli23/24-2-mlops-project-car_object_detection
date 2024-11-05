@@ -4,8 +4,13 @@ import sys
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
 from predict import make_predictions
+from dotenv import load_dotenv
 
-def test_predict(endpoint):
+
+load_dotenv()
+
+def test_predict():
+    endpoint = os.getenv("ENDPOINT","default_endpoint")+"/predict"
     img_path = "tests/img.jpg"
     label_path = "tests/label.txt"
     
