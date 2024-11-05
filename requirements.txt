@@ -1,3 +1,4 @@
+sphinx==7.2.6
 python-dotenv
 dvc[s3]
 requests

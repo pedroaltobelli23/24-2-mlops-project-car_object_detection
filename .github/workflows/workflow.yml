@@ -63,6 +63,26 @@ jobs:
             run: pip install -r deploy/requirements/create_lambda_requirements.txt
 
           - name: Create Endpoint
-            run: python deploy/deploy_API.py --image_uri ${{secrets.AWS_ACCOUNT_ID}}.dkr.ecr.${{secrets.AWS_REGION}}.amazonaws.com/${{secrets.ECR_NAME}}:latest --api_gateway demo_project_pedroatp
+            run: | 
+              endpoint=$(python deploy/deploy_API.py --image_uri ${{secrets.AWS_ACCOUNT_ID}}.dkr.ecr.${{secrets.AWS_REGION}}.amazonaws.com/${{secrets.ECR_NAME}}:latest --api_gateway demo_project_pedroatp)
+              echo "::set-output name=api_endpoint::$endpoint"
+
+    Run-Tests:
+      runs-on: ubuntu-latest
+      needs: Create-API-Endpoint
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v4
+
+        - name: Set up Python
+          uses: actions/setup-python@v4
+          with:
+            python-version: '3.12'
+
+        - name: Install dependencies
+          run: pip install -r requirements.txt
+
+        - name: Run pytest
+          run: pytest -s tests/test_predict.py --endpoint ${{ needs.Create-API-Endpoint.outputs.api_endpoint }}/predict
 
           
