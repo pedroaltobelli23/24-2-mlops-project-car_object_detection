@@ -98,7 +98,7 @@ class Deployment:
                 Principal="apigateway.amazonaws.com",
             )
 
-            print(api_gateway_create["ApiEndpoint"])
+            print(str(api_gateway_create["ApiEndpoint"]))
         except Exception as e:
             print(traceback.format_exc())
 
