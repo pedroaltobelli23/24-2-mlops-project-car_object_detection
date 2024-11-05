@@ -80,7 +80,7 @@ jobs:
             python-version: '3.12'
 
         - name: Install dependencies
-          run: pip install -r requirements.txt
+          run: pip install -r tests/requirements.txt
 
         - name: Run pytest
           run: pytest -s tests/test_predict.py --endpoint ${{ needs.Create-API-Endpoint.outputs.api_endpoint }}/predict

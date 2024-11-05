@@ -1,8 +1,4 @@
-
-import requests
-import cv2
 import os
-import pytest
 from PIL import Image
 import sys
 
