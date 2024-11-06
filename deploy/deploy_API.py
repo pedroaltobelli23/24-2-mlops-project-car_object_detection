@@ -98,7 +98,11 @@ class Deployment:
                 Principal="apigateway.amazonaws.com",
             )
 
-            print("TestingIfGo")
+            endpoint = str(api_gateway_create["ApiEndpoint"])
+            
+            endpoint_no_region = endpoint.replace(self.region, "REGION")
+            
+            print(endpoint_no_region)
         except Exception as e:
             print(traceback.format_exc())
 

@@ -11,6 +11,10 @@ load_dotenv()
 
 def test_predict():
     endpoint = os.getenv("ENDPOINT","default_endpoint")+"/predict"
+    region = os.getenv("AWS_REGION")
+    
+    endpoint = endpoint.replace("REGION",region)
+    print(endpoint)
     img_path = "tests/img.jpg"
     label_path = "tests/label.txt"
     
