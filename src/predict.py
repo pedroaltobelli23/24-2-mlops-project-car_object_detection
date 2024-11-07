@@ -21,6 +21,7 @@ class Predictor:
         """
         try:
             print("Endpoint: ",self.endpoint)
+            print("Image_path: ", self.image_path)
             data = open(self.image_path,"rb").read()
             resp = requests.post(self.endpoint, data=data).json()["result"]
         except Exception as e:
