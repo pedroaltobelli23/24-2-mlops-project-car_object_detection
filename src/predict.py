@@ -3,7 +3,7 @@ import os
 import argparse
 import traceback
 
-class Predictor():
+class Predictor:
     """Class with the make_predictions_from_endpoint function
     
         :param endpoint: Url of AWS endpoint with lambda function
@@ -12,10 +12,9 @@ class Predictor():
         :param image_path: Path of the Image to make prediction
         :type image_path: str 
     """
-    def __init__(self, endpoint, image_path, model_path):
+    def __init__(self, endpoint, image_path):
         self.endpoint = endpoint
         self.image_path = image_path
-        self.model_path = model_path
         
     def make_predictions_from_endpoint(self):
         """Using the API Endpoint, do the prediction on a image

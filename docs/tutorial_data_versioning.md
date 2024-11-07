@@ -36,7 +36,7 @@ After that, you will have a tag v0.0.0 with the first version of the dataset!
 
 Everytime you want to create a new dataset version, run the steps bellow:
 
-1. Do changes in the function prepocess from [preprocess.py](./data/preprocess.py). Then, run [data.sh](./data.sh):
+1. Do changes in the function prepocess from dataset.py. Then, run data.sh:
 
 > [!WARNING]
 > Check if you are at main:

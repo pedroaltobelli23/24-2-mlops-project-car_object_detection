@@ -57,6 +57,8 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="predict.html">predict module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataset.html">dataset module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="s3_bucket.html">s3_bucket module</a></li>
 </ul>
 
         </div>
@@ -87,17 +89,12 @@
 <span id="train-module"></span><h1>train module<a class="headerlink" href="#module-train" title="Link to this heading"></a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="train.main">
-<span class="sig-prename descclassname"><span class="pre">train.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hiper_parameters</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#train.main" title="Link to this definition"></a></dt>
-<dd><p>Set mlflow to save tracking inside folder model/runs/mlflow. Logs are saved in logs/model_train.log.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="train.train_with_YOLO">
-<span class="sig-prename descclassname"><span class="pre">train.</span></span><span class="sig-name descname"><span class="pre">train_with_YOLO</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#train.train_with_YOLO" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">train.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#train.main" title="Link to this definition"></a></dt>
 <dd><p>Train a YOLO model using specified hyperparameters and save the trained model to an S3 bucket.</p>
-<p>This function initializes a YOLO model, trains it on the Stanford car dataset using the provided 
-hyperparameters, and then exports the best model in ONNX format. The trained model is uploaded 
+<p>This function initializes a YOLO model, trains it on the Stanford car dataset using the provided
+hyperparameters, and then exports the best model in ONNX format. The trained model is uploaded
 to an S3 bucket for storage.</p>
+<p>Set mlflow to save tracking inside folder model/runs/mlflow. Logs are saved in logs/model_train.log.</p>
 <section id="parameters">
 <h2>Parameters:<a class="headerlink" href="#parameters" title="Link to this heading"></a></h2>
 <dl class="simple">
@@ -120,6 +117,11 @@ to an S3 bucket for storage.</p>
 </dl>
 </section>
 </dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="train.train_with_YOLO">
+<span class="sig-prename descclassname"><span class="pre">train.</span></span><span class="sig-name descname"><span class="pre">train_with_YOLO</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#train.train_with_YOLO" title="Link to this definition"></a></dt>
+<dd></dd></dl>
 
 </section>
 

@@ -26,6 +26,10 @@ Welcome to Car Detection Mlops's documentation!
 
    predict.rst
 
+   dataset.rst
+
+   s3_bucket.rst
+
 Indices and tables
 ==================
 
