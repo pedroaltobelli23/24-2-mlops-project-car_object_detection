@@ -13,27 +13,59 @@ import sys
 
 load_dotenv()
 
-def intersection(box1,box2):
-    box1_x1,box1_y1,box1_x2,box1_y2 = box1[:4]
-    box2_x1,box2_y1,box2_x2,box2_y2 = box2[:4]
-    x1 = max(box1_x1,box2_x1)
-    y1 = max(box1_y1,box2_y1)
-    x2 = min(box1_x2,box2_x2)
-    y2 = min(box1_y2,box2_y2)
-    return (x2-x1)*(y2-y1)
+def intersectionOverUnion(bb1, bb2):
+    r"""
+        Calculate the Intersection Over Union (IoU) between two bounding boxes.
 
-def union(box1,box2):
-    box1_x1,box1_y1,box1_x2,box1_y2 = box1[:4]
-    box2_x1,box2_y1,box2_x2,box2_y2 = box2[:4]
-    box1_area = (box1_x2-box1_x1)*(box1_y2-box1_y1)
-    box2_area = (box2_x2-box2_x1)*(box2_y2-box2_y1)
-    return box1_area + box2_area - intersection(box1,box2)
+        .. math::
 
-def iou(box1,box2):
-    return intersection(box1,box2)/union(box1,box2)
+            \text{IoU} = \frac{\text{Intersection Area}}{\text{Union Area}}
+            
+        Parameters:
+        ~~~~~~~~~~~~~~~~~~~~
+        bb1 : list
+            Coordinates of the first bounding box in the format `[x1, y1, x2, y2]`.
+        bb2 : list
+            Coordinates of the second bounding box in the format `[x1, y1, x2, y2]`.
+
+        Returns:
+        ~~~~~~~~~~
+        float
+            IoU value
+    """
+    bb1_x1, bb1_y1, bb1_x2, bb1_y2 = bb1[:4]
+    bb2_x1, bb2_y1, bb2_x2, bb2_y2 = bb2[:4]
+    
+    x1 = max(bb1_x1, bb2_x1)
+    y1 = max(bb1_y1, bb2_y1)
+    x2 = min(bb1_x2, bb2_x2)
+    y2 = min(bb1_y2, bb2_y2)
+    intersec = (x2-x1)*(y2-y1)
+    
+    bb1_area = (bb1_x2-bb1_x1)*(bb1_y2-bb1_y1)
+    bb2_area = (bb2_x2-bb2_x1)*(bb2_y2-bb2_y1)
+    
+    union = bb1_area + bb2_area - intersec
+    IoU = intersec/union
+    return IoU
 
 
 def make_prediction(event, context):
+    """
+        Handle the prediction process for an image input using the model inside S3 bucket.
+
+        Parameters:
+        ~~~~~~~~~~~~~~~~~~~~
+        event (dict): Event data from AWS Lambda containing the encoded image.
+        
+        Returns:
+        ~~~~~~~~~~
+        dict: The result of the prediction, containing detected bounding boxes or an error message.
+            - Class (str): Name of the class
+            - Confidence (float): Percentage of confidence for the bounding box predicted
+            - Point 1 (int, int): Top left corner of the bounding box
+            - Point 2 (int, int): Bottom right corner of the bounding box
+    """
     try:
         print("Python version")
         print(sys.version)
@@ -107,7 +139,7 @@ def make_prediction(event, context):
         result = []
         while len(boxes) > 0:
             result.append(boxes[0])
-            boxes = [box for box in boxes if iou(box, boxes[0]) < 0.5]
+            boxes = [box for box in boxes if intersectionOverUnion(box, boxes[0]) < 0.5]
 
         result_dict = {}
         for i in range(len(result)):

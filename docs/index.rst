@@ -30,6 +30,10 @@ Welcome to Car Detection Mlops's documentation!
 
    s3_bucket.rst
 
+   lambda_function.rst
+
+   deploy_API.rst
+
 Indices and tables
 ==================
 

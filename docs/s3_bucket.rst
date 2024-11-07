@@ -1,4 +1,4 @@
-s3\_bucket module
+S3 Bucket module
 =================
 
 .. automodule:: s3_bucket

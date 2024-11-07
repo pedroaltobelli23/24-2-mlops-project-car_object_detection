@@ -18,10 +18,12 @@ import os
 
 sys.path.insert(0, os.path.abspath("../src"))
 sys.path.insert(0, os.path.abspath("../data"))
+sys.path.insert(0, os.path.abspath("../deploy"))
 
 extensions = [
     "sphinx.ext.autodoc",
-    "myst_parser"
+    "myst_parser",
+    "sphinx.ext.mathjax"
     ]
 
 templates_path = ['_templates']

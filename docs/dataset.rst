@@ -1,4 +1,4 @@
-dataset module
+Dataset module
 ==============
 
 .. automodule:: dataset

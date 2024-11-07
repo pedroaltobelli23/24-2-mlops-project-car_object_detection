@@ -3,7 +3,7 @@ from PIL import Image
 import sys
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
-from predict import Predictor
+from predict import make_predictions
 from dotenv import load_dotenv
 
 
@@ -40,8 +40,7 @@ def test_predict():
     y1_true = center_y-(height/2)
     y2_true = center_y+(height/2)
     
-    pred = Predictor(endpoint,img_path)
-    resp = pred.make_predictions()
+    resp = make_predictions(endpoint,img_path)
 
     assert resp["class"] == true_label, f"Expected class {true_label}, got {resp['class']}"
     print(resp["class"], true_label)

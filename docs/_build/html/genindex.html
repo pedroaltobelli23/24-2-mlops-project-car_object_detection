@@ -48,10 +48,12 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Modules:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="train.html">train module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="predict.html">predict module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dataset.html">dataset module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="s3_bucket.html">s3_bucket module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="train.html">Train module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="predict.html">Predict module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataset.html">Dataset module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="s3_bucket.html">S3 Bucket module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lambda_function.html">Lambda Function module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deploy_API.html">Deploy API module</a></li>
 </ul>
 
         </div>
@@ -84,7 +86,9 @@
  <a href="#A"><strong>A</strong></a>
  | <a href="#C"><strong>C</strong></a>
  | <a href="#D"><strong>D</strong></a>
+ | <a href="#F"><strong>F</strong></a>
  | <a href="#H"><strong>H</strong></a>
+ | <a href="#I"><strong>I</strong></a>
  | <a href="#L"><strong>L</strong></a>
  | <a href="#M"><strong>M</strong></a>
  | <a href="#P"><strong>P</strong></a>
@@ -103,6 +107,12 @@
 <h2 id="C">C</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="deploy_API.html#deploy_API.Deployment.create_API">create_API() (deploy_API.Deployment method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="deploy_API.html#deploy_API.Deployment.create_lambda_function">create_lambda_function() (deploy_API.Deployment method)</a>
+</li>
       <li><a href="s3_bucket.html#s3_bucket.S3_Bucket.create_S3_bucket">create_S3_bucket() (s3_bucket.S3_Bucket method)</a>
 </li>
   </ul></td>
@@ -118,13 +128,30 @@
         <li><a href="dataset.html#module-dataset">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="dataset.html#dataset.Dataset">Dataset (class in dataset)</a>
 </li>
       <li><a href="s3_bucket.html#s3_bucket.S3_Bucket.delete_S3_bucket">delete_S3_bucket() (s3_bucket.S3_Bucket method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    deploy_API
+
+      <ul>
+        <li><a href="deploy_API.html#module-deploy_API">module</a>
+</li>
+      </ul></li>
+      <li><a href="deploy_API.html#deploy_API.Deployment">Deployment (class in deploy_API)</a>
+</li>
       <li><a href="dataset.html#dataset.Dataset.dowload_dataset">dowload_dataset() (dataset.Dataset method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="F">F</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="deploy_API.html#deploy_API.Deployment.full_deploy">full_deploy() (deploy_API.Deployment method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -137,8 +164,25 @@
   </ul></td>
 </tr></table>
 
+<h2 id="I">I</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="lambda_function.html#lambda_function.intersectionOverUnion">intersectionOverUnion() (in module lambda_function)</a>
+</li>
+  </ul></td>
+</tr></table>
+
 <h2 id="L">L</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    lambda_function
+
+      <ul>
+        <li><a href="lambda_function.html#module-lambda_function">module</a>
+</li>
+      </ul></li>
+  </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="s3_bucket.html#s3_bucket.S3_Bucket.list_S3_buckets">list_S3_buckets() (s3_bucket.S3_Bucket method)</a>
 </li>
@@ -150,7 +194,9 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="train.html#train.main">main() (in module train)</a>
 </li>
-      <li><a href="predict.html#predict.Predictor.make_predictions">make_predictions() (predict.Predictor method)</a>
+      <li><a href="lambda_function.html#lambda_function.make_prediction">make_prediction() (in module lambda_function)</a>
+</li>
+      <li><a href="predict.html#predict.make_predictions">make_predictions() (in module predict)</a>
 </li>
       <li><a href="dataset.html#dataset.Dataset.merge_train_test">merge_train_test() (dataset.Dataset method)</a>
 </li>
@@ -159,6 +205,10 @@
 
       <ul>
         <li><a href="dataset.html#module-dataset">dataset</a>
+</li>
+        <li><a href="deploy_API.html#module-deploy_API">deploy_API</a>
+</li>
+        <li><a href="lambda_function.html#module-lambda_function">lambda_function</a>
 </li>
         <li><a href="predict.html#module-predict">predict</a>
 </li>
@@ -186,8 +236,6 @@
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="predict.html#predict.Predictor">Predictor (class in predict)</a>
-</li>
       <li><a href="dataset.html#dataset.Dataset.preprocess">preprocess() (dataset.Dataset method)</a>
 </li>
   </ul></td>

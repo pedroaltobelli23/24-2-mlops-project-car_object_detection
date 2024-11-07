@@ -50,10 +50,12 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Modules:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="train.html">train module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="predict.html">predict module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dataset.html">dataset module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="s3_bucket.html">s3_bucket module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="train.html">Train module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="predict.html">Predict module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataset.html">Dataset module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="s3_bucket.html">S3 Bucket module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lambda_function.html">Lambda Function module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deploy_API.html">Deploy API module</a></li>
 </ul>
 
         </div>
@@ -98,19 +100,16 @@
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Modules:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="train.html">train module</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="train.html">Train module</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="train.html#train.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="train.html#train.train_with_YOLO"><code class="docutils literal notranslate"><span class="pre">train_with_YOLO()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="predict.html">predict module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="predict.html#predict.Predictor"><code class="docutils literal notranslate"><span class="pre">Predictor</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="predict.html#predict.Predictor.make_predictions"><code class="docutils literal notranslate"><span class="pre">Predictor.make_predictions()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="predict.html">Predict module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="predict.html#predict.make_predictions"><code class="docutils literal notranslate"><span class="pre">make_predictions()</span></code></a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="dataset.html">dataset module</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="dataset.html">Dataset module</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="dataset.html#dataset.Dataset"><code class="docutils literal notranslate"><span class="pre">Dataset</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="dataset.html#dataset.Dataset.dowload_dataset"><code class="docutils literal notranslate"><span class="pre">Dataset.dowload_dataset()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="dataset.html#dataset.Dataset.merge_train_test"><code class="docutils literal notranslate"><span class="pre">Dataset.merge_train_test()</span></code></a></li>
@@ -120,13 +119,27 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="s3_bucket.html">s3_bucket module</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="s3_bucket.html">S3 Bucket module</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="s3_bucket.html#s3_bucket.S3_Bucket"><code class="docutils literal notranslate"><span class="pre">S3_Bucket</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="s3_bucket.html#s3_bucket.S3_Bucket.add_file_model_S3_bucket"><code class="docutils literal notranslate"><span class="pre">S3_Bucket.add_file_model_S3_bucket()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="s3_bucket.html#s3_bucket.S3_Bucket.create_S3_bucket"><code class="docutils literal notranslate"><span class="pre">S3_Bucket.create_S3_bucket()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="s3_bucket.html#s3_bucket.S3_Bucket.delete_S3_bucket"><code class="docutils literal notranslate"><span class="pre">S3_Bucket.delete_S3_bucket()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="s3_bucket.html#s3_bucket.S3_Bucket.handle_arguments"><code class="docutils literal notranslate"><span class="pre">S3_Bucket.handle_arguments()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="s3_bucket.html#s3_bucket.S3_Bucket.list_S3_buckets"><code class="docutils literal notranslate"><span class="pre">S3_Bucket.list_S3_buckets()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="lambda_function.html">Lambda Function module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="lambda_function.html#lambda_function.intersectionOverUnion"><code class="docutils literal notranslate"><span class="pre">intersectionOverUnion()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="lambda_function.html#lambda_function.make_prediction"><code class="docutils literal notranslate"><span class="pre">make_prediction()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="deploy_API.html">Deploy API module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="deploy_API.html#deploy_API.Deployment"><code class="docutils literal notranslate"><span class="pre">Deployment</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deploy_API.html#deploy_API.Deployment.create_API"><code class="docutils literal notranslate"><span class="pre">Deployment.create_API()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="deploy_API.html#deploy_API.Deployment.create_lambda_function"><code class="docutils literal notranslate"><span class="pre">Deployment.create_lambda_function()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="deploy_API.html#deploy_API.Deployment.full_deploy"><code class="docutils literal notranslate"><span class="pre">Deployment.full_deploy()</span></code></a></li>
 </ul>
 </li>
 </ul>
