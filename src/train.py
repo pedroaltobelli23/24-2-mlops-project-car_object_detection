@@ -19,16 +19,33 @@ logging.basicConfig(
 load_dotenv(find_dotenv())
 
 def train_with_YOLO(hp : dict):
-    """Train YOLO using the Stanford car dataset and save it to an S3 bucket.
+    """
+    Train a YOLO model using specified hyperparameters and save the trained model to an S3 bucket.
 
-    :param hp: A dictionary of hyperparameters.
-    :type hp: dict
+    This function initializes a YOLO model, trains it on the Stanford car dataset using the provided 
+    hyperparameters, and then exports the best model in ONNX format. The trained model is uploaded 
+    to an S3 bucket for storage.
 
-    :return: True if training was successful and the model was saved in the S3 bucket, False otherwise.
-    :rtype: bool
+    Parameters:
+    -----------
+    hp : dict
+        A dictionary containing hyperparameters for training, including:
+        
+        - 'epochs' (int): Number of training epochs.
+        - 'imgsz' (int): Image size for training.
+        - 'scale' (float): Scaling factor for augmentation.
+        - 'batch' (int): Batch size for training.
+        - 'optimizer' (str): Optimizer to use for training.
+
+    Returns:
+    --------
+    bool
+        True if training was successful and the model was uploaded to the S3 bucket, False otherwise.
     """
     
     try:
+        
+        model = YOLO("yolov8n.pt")
         
         logging.info("Training model...")
         with mlflow.start_run():
@@ -56,24 +73,30 @@ def train_with_YOLO(hp : dict):
         )
         
         bkt = os.getenv("BUCKET_MODEL")
-        logging.info(f"{model_path} saved into {bkt} as {object_name}.")
+        project_root = os.getcwd()
+        model_path_short = os.path.relpath(model_path, project_root)
+
+        logging.info(f"{model_path_short} saved into {bkt} as {object_name}.")
     except Exception as e:
         logging.error(traceback.format_exc())
         return False
     return True
 
-if __name__=="__main__":
+def main(hiper_parameters):
+    """Set mlflow to save tracking inside folder model/runs/mlflow. Logs are saved in logs/model_train.log.
+    """
+    
     try:
-        hiper_parameters = {"experiment_name":"training","epochs":1,"batch":12,"optimizer":"SGD","imgsz":448,"scale":0.5}
-    
-        model = YOLO("yolov8n.pt")
-    
         settings.update({"mlflow":True})
         mlflow.set_tracking_uri("file:../models/runs/mlflow")
     
         mlflow.set_experiment(hiper_parameters.get("experiment_name"))
         
         result = train_with_YOLO(hiper_parameters)
-        
     except Exception as e:
         print(e)
+
+if __name__=="__main__":
+    # Change this parameters when training
+    hiper_parameters = {"experiment_name":"training","epochs":5,"batch":12,"optimizer":"SGD","imgsz":448,"scale":0.5}
+    main(hiper_parameters)

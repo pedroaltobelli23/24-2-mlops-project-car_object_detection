@@ -1,5 +1,5 @@
 .. Car Detection Mlops documentation master file, created by
-   sphinx-quickstart on Mon Nov  4 16:54:17 2024.
+   sphinx-quickstart on Wed Nov  6 20:46:05 2024.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
@@ -7,10 +7,24 @@ Welcome to Car Detection Mlops's documentation!
 ===============================================
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+   :maxdepth: 4
+   :caption: Tutorial:
 
+   tutorial_startup
 
+   tutorial_data_versioning
+
+   tutorial_training
+   
+   tutorial_deploy
+
+.. toctree::
+   :maxdepth: 4
+   :caption: Modules:
+
+   train.rst
+
+   predict.rst
 
 Indices and tables
 ==================

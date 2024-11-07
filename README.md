@@ -48,7 +48,7 @@ BUCKET_MODEL="bucket-model-name"
 BUCKET_DATASET="bucket-dataset-name"
 ```
 
-4. Add the following variables is the "Actions secrets and variables" section at settings
+4. Add the following variables in the "Actions secrets and variables" section at settings
 
 ![github env](./imgs/github_env.png)
 
@@ -90,7 +90,7 @@ git tag -d $(git tag -l)
 ./scrips/configure_dvc.sh bucket-dataset-name
 ```
 
-After that,  you will have a tag v0.0.0 with the first version of the dataset!
+After that, you will have a tag v0.0.0 with the first version of the dataset!
 
 ### Create a new dataset version
 
@@ -178,3 +178,9 @@ python3 data/s3_bucket.py --file_path /absolute_train_path/weights/best.onnx
 ## Steps for deploying
 
 For deploying the model do a git push to the main. Go to the section Actions in the repository to see all the details from the workflow
+
+![github_actions_working](./imgs/github_actions_working.png)
+
+The API Endpoint can be found in:
+
+![api_endpoint_actions](./imgs/api_endpoint_actions.png)
