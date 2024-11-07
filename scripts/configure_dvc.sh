@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Remove DVC files
 rm -rf .dvc/ data/data.zip.dvc .dvcignore
 
 BUCKET_NAME=$1
@@ -20,6 +21,7 @@ git commit -m "Add data to project"
 
 git push
 
+# Add connection to the S3 bucket
 dvc remote add -f myremote s3://"$BUCKET_NAME"
 
 dvc remote default myremote

@@ -1,6 +1,14 @@
+"""
+    Model training with YOLOv8.
+    
+    - Mlflow: Model tracking. Can access in localhost:5000.
+    - boto3: Connect to S3 bucket
+    
+    User can easily modify hiperparameters used for training. 
+"""
+
 from ultralytics import YOLO, settings
 import mlflow
-import uuid
 import os
 from dotenv import set_key, find_dotenv, load_dotenv
 import boto3

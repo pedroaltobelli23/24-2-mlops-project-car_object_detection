@@ -34,6 +34,12 @@ Welcome to Car Detection Mlops's documentation!
 
    deploy_API.rst
 
+.. toctree::
+   :maxdepth: 4
+   :caption: Scripts:
+
+   scripts
+   
 Indices and tables
 ==================
 

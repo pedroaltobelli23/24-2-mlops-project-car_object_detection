@@ -18,13 +18,13 @@ git tag -d $(git tag -l)
 
 ![tags_erased](./_static/imgs/tags_erased.png)
 
-2. Run data.sh to create the file "data/data.zip" with your preprocessed data. Drop value is the ratio of the dowloaded dataset that will be erased.
+2. Run `data.sh to create the file "data/data.zip" with your preprocessed data. Drop value is the ratio of the dowloaded dataset that will be erased.
 
 ```Bash
 ./scripts/data.sh <drop_value>
 ```
 
-5. Run configure_dvc.sh and pass as argument the Bucket created for the dataset
+3. Run `configure_dvc.sh` and pass as argument the Bucket created for the dataset
 
 ```Bash
 ./scrips/configure_dvc.sh bucket-dataset-name
@@ -36,19 +36,22 @@ After that, you will have a tag v0.0.0 with the first version of the dataset!
 
 Everytime you want to create a new dataset version, run the steps bellow:
 
-1. Do changes in the function prepocess from dataset.py. Then, run data.sh:
+1. Do changes in the function prepocess from `dataset.py`. Then, run `data.sh`:
 
-> [!WARNING]
-> Check if you are at main:
-> ```Bash
-> git checkout main
-> ```
+
+```{admonition} WARNING
+:class: warning
+
+Check if you are at main:
+```Bash
+git checkout main
+```
 
 ```Bash
 ./scrips/data.sh <drop_value>
 ```
 
-2. Run script that create new data version:
+2. Run `new_dataset_version.sh` script to create new data version:
 
 ```Bash
 ./scripts/new_dataset_version.sh vA.B.C

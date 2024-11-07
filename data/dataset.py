@@ -1,4 +1,6 @@
-"""This module is used to install and preprocess the data from https://universe.roboflow.com/openglpro/stanford_car/dataset/10 specific for the YOLOv8 version. It is possible to modify the function preprocess to do your onw preprocessing
+"""
+    This module is used to install and preprocess the data from https://universe.roboflow.com/openglpro/stanford_car/dataset/10 specific for the YOLOv8 version. 
+    It is possible to modify the function preprocess to do your own preprocessing.
 """
 
 import os

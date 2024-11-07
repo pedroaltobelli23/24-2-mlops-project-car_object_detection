@@ -1,3 +1,14 @@
+"""
+    This script serves as an AWS Lambda function for performing object detection on images using an ONNX model stored in an S3 bucket. The function is designed to handle image input in base64 format, download the model if it's not already available, and make predictions on bounding boxes for detected objects.
+
+    - Load AWS information from `.env` file.
+    - Decode the base64-encoded image input from a HTTP request and match resize the image to the correct input.
+    - Download the ONNX model from an S3 bucket and save it into `/tmp`.
+    - Run inference.
+    - Calculate Intersection Over Union (IoU) to remove overlapping boxes.
+    - Return the prediction results.
+"""
+
 import boto3
 import os
 from dotenv import load_dotenv

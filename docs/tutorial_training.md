@@ -4,13 +4,13 @@ Here is a step by step guide to train the model, see ["steps for data versioning
 
 1. Unzip data using the command:
 
-```Bash
+```bash
 unzip data/data.zip
 ```
 
 2. Inside the Ultralytics folder, change it so runs are saved in the models folder of this repository. 
 
-```Bash
+```bash
 cd /home/user/.config/Ultralytics
 
 sudo vim settings.json

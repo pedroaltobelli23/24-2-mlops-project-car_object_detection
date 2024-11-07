@@ -8,8 +8,10 @@ pip install -r requirements.txt
 
 Ensure Python version 3.12 is being used
 
-> [!WARNING]
-> If you would like to run with GPU, download CUDA Toolkit 12.6 https://developer.nvidia.com/cuda-downloads
+```{admonition} WARNING
+:class: warning
+If you would like to run with GPU, download CUDA Toolkit 12.6 [https://developer.nvidia.com/cuda-downloads](https://developer.nvidia.com/cuda-downloads)
+```
 
 2. Create .env file in the root of the repository
 
@@ -38,8 +40,9 @@ BUCKET_DATASET="bucket-dataset-name"
 
 ![github env](./_static/imgs/github_env.png)
 
-> [!INFO]
-> 
-> ```ECR_NAME``` is the name of the ECR container
-> ```BUCKET_MODEL``` is the name of the bucket were the model is stored
-> 
+```{admonition} INFO
+:class: info
+```ECR_NAME``` is the name of the ECR container.
+
+```BUCKET_MODEL``` is the name of the bucket were the model is stored.
+```
