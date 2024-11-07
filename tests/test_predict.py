@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 def test_predict():
-    endpoint = os.getenv("ENDPOINT","default")
+    endpoint = os.getenv("ENDPOINT","default")+"/predict"
     region = os.getenv("AWS_REGION")
     
     endpoint = endpoint.replace("REGION",region)
