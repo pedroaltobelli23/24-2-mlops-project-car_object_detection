@@ -10,8 +10,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 def test_predict():
-    """Test prediction using the function make_prediction
-    """
     endpoint = os.getenv("ENDPOINT","default_endpoint")+"/predict"
     region = os.getenv("AWS_REGION")
     
@@ -40,6 +38,7 @@ def test_predict():
     y1_true = center_y-(height/2)
     y2_true = center_y+(height/2)
     
+
     resp = make_predictions(endpoint,img_path)
 
     assert resp["class"] == true_label, f"Expected class {true_label}, got {resp['class']}"
