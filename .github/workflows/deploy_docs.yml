@@ -1,4 +1,5 @@
-name: GitHub Pages
+# File modified from https://github.com/peaceiris/actions-gh-pages/tree/v4/.
+name: Github Pages for the docs html
 
 on:
   push:
@@ -11,32 +12,30 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Setup Python
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
       - name: Upgrade pip
-        run: |
-          # install pip=>20.1 to use "pip cache dir"
-          python3 -m pip install --upgrade pip
+        run: python -m pip install --upgrade pip
 
       - name: Get pip cache dir
         id: pip-cache
         run: echo "dir=$(pip cache dir)" >> $GITHUB_OUTPUT
 
       - name: Cache dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ steps.pip-cache.outputs.dir }}
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements_deploy.txt') }}
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements_docs.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
 
       - name: Install dependencies
-        run: python3 -m pip install -r ./requirements_deploy.txt
+        run: python -m pip install -r ./requirements_docs.txt
 
       - name: Build documentation
         working-directory: ./docs

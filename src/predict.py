@@ -17,5 +17,6 @@ def make_predictions(endpoint,image_path):
     print("Endpoint: ",endpoint)
     data = open(image_path,"rb").read()
     resp = requests.post(endpoint, data=data).json()["result"]
+    print(resp)
     
-    return resp
+    return resp[0]

@@ -174,7 +174,7 @@ def make_prediction(event, context):
             print("\n")
         
         if len(result_dict)>0:
-            return {"result":result_dict[0]}
+            return {"result":result_dict}
         else:
             print(f"No detections found in the image.")
             return {"result":None}

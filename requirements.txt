@@ -1,5 +1,6 @@
 sphinx==7.2.6
 sphinx-rtd-theme
+myst-parser
 python-dotenv
 dvc[s3]
 requests
