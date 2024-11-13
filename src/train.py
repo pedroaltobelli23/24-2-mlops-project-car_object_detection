@@ -4,7 +4,10 @@
     - Mlflow: Model tracking. Can access in localhost:5000.
     - boto3: Connect to S3 bucket
     
-    User can easily modify hiperparameters used for training. Logs are saved in logs/model_train.log
+    User can easily modify hiperparameters used for training. Logs are saved in logs/model_train.log. Model is saved in .onnx format. 
+    This format is lighter and for predictions, it is not necessary to install pytorch and ultralytics packages.
+    Very useful to make the ECR Docker lighter.
+    The only difference is that it is necessary to do some preprocessing, that is described in the lambda function. 
 """
 
 from ultralytics import YOLO, settings
@@ -48,6 +51,9 @@ def train_with_YOLO(hp: dict):
         object_name = "model.onnx"
         model_path = os.path.join(results.save_dir, "weights", "best.onnx")
 
+        # Export model from .pt to .onnx. This format is lighter and for predictions, it is not necessary to install pytorch and ultralytics packages.
+        # Very useful to make the ECR Docker lighter.
+        # The only difference is that it is necessary to do some preprocessing, that is described in the lambda function. 
         model.export(format="onnx")
 
         logging.info(results)

@@ -99,7 +99,10 @@
 <li><p>Mlflow: Model tracking. Can access in localhost:5000.</p></li>
 <li><p>boto3: Connect to S3 bucket</p></li>
 </ul>
-<p>User can easily modify hiperparameters used for training. Logs are saved in logs/model_train.log</p>
+<p>User can easily modify hiperparameters used for training. Logs are saved in logs/model_train.log. Model is saved in .onnx format. 
+This format is lighter and for predictions, it is not necessary to install pytorch and ultralytics packages.
+Very useful to make the ECR Docker lighter.
+The only difference is that it is necessary to do some preprocessing, that is described in the lambda function.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="train.main">
 <span class="sig-prename descclassname"><span class="pre">train.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#train.main" title="Link to this definition"></a></dt>
