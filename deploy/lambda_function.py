@@ -74,10 +74,11 @@ def make_prediction(event, context):
         Returns:
         ~~~~~~~~~~
         dict: The result of the prediction, containing detected bounding boxes or an error message.
-            - Class (str): Name of the class
-            - Confidence (float): Percentage of confidence for the bounding box predicted
-            - Point 1 (int, int): Top left corner of the bounding box
-            - Point 2 (int, int): Bottom right corner of the bounding box
+            Inside "result" there is a list of dicts with the following keys:
+                - Class (str): Name of the class
+                - Confidence (float): Percentage of confidence for the bounding box predicted
+                - Point 1 (int, int): Top left corner of the bounding box
+                - Point 2 (int, int): Bottom right corner of the bounding box
     """
     try:
         print("Python version")
@@ -85,16 +86,16 @@ def make_prediction(event, context):
         print("Version info.")
         print(sys.version_info)
         
+        # Decode base64 Image to a ImageFile object
         img_B = event["body"].encode("utf-8")
         img_b64 = base64.b64decode(img_B)
         img = Image.open(BytesIO(img_b64))
         
-        print("Downloading model")
         model_path = os.path.join("/tmp", "model.onnx")
         
         # Dowload file from S3 if not dowloaded it in the docker
         if not os.path.exists(model_path):
-        
+            print("Downloading model...")
             s3 = boto3.client(
                 "s3",
                 aws_access_key_id=os.getenv("ACCESS_KEY_ID"),
@@ -103,9 +104,9 @@ def make_prediction(event, context):
             )
             
             bucket_name = os.getenv("BUCKET_MODEL")
-            print(f"Bucket: {bucket_name}")
             s3.download_file(bucket_name, 'model.onnx', model_path)
-        
+
+        # SessionOptions for onnxruntime   
         so = ort.SessionOptions()
         so.log_severity_level = 3
         
@@ -116,6 +117,7 @@ def make_prediction(event, context):
         
         img_sz = model_input[0].shape[-1]
     
+        # Reshape Image to fit into model input
         img_width, img_height = img.size
         img = img.resize((img_sz,img_sz))
         img = img.convert("RGB")
@@ -136,7 +138,8 @@ def make_prediction(event, context):
         boxes = []
         for row in output:
             prob = row[4:].max()
-            if prob < 0.5:
+            # Discard boxes with low confidence
+            if prob < 0.3:
                 continue
             class_id = row[4:].argmax()
             label = yolo_classes[class_id]
@@ -150,11 +153,13 @@ def make_prediction(event, context):
 
         boxes.sort(key=lambda x: x[5], reverse=True)
         result = []
+        # Exclude all bboxes that are very close one to another, using NMS (Non-maximum supression)
         while len(boxes) > 0:
             result.append(boxes[0])
-            boxes = [box for box in boxes if intersectionOverUnion(box, boxes[0]) < 0.5]
+            boxes = [box for box in boxes if intersectionOverUnion(box, boxes[0]) < 0.8]
 
         result_list = []
+        # Save all boxes as a list of dicts
         for i in range(len(result)):
             res = result[i]
             

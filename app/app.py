@@ -4,7 +4,7 @@ import numpy as np
 import cv2
 
 def main():
-    endpoint = "https://9b0l1sp028.execute-api.us-east-2.amazonaws.com/predict"
+    endpoint = "https://er5wx1be71.execute-api.us-east-2.amazonaws.com/predict"
     with open("index.md") as f:
         st.markdown(f.read())
     
@@ -14,11 +14,10 @@ def main():
         bytes_img = uploaded_file.getvalue()
         
         resp = requests.post(endpoint, data=bytes_img).json()["result"]
-        
+        print(resp)
         if resp:
             image_array = np.frombuffer(bytes_img, dtype=np.uint8)
             img = cv2.imdecode(image_array, cv2.COLOR_BGR2RGB)
-            
             st.write("Something")
             print(resp)
             cv2.rectangle(img,(resp["x1"],resp["y1"]),(resp["x2"],resp["y2"]),color=(255, 0, 0),thickness=10)
