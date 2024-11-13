@@ -1,5 +1,7 @@
 # Startup
 
+This tutorial is necessary to startup the project. Here you will be able to create the S3 buckets that will be used to store data and the model file in the ONNX format.
+
 1. Install all the requirements with:
 
 ```Bash

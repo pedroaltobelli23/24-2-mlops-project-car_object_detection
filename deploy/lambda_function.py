@@ -7,6 +7,8 @@
     - Run inference.
     - Calculate Intersection Over Union (IoU) to remove overlapping boxes.
     - Return the prediction results.
+    
+    Logs are saved in CloudWatch and can be viewed using the script logs/see_logs_lambda.py
 """
 
 import boto3

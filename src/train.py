@@ -4,7 +4,7 @@
     - Mlflow: Model tracking. Can access in localhost:5000.
     - boto3: Connect to S3 bucket
     
-    User can easily modify hiperparameters used for training. 
+    User can easily modify hiperparameters used for training. Logs are saved in logs/model_train.log
 """
 
 from ultralytics import YOLO, settings

@@ -47,13 +47,6 @@ class S3_Bucket:
         bool: True if bucket creation is successful, False otherwise.
         """
         try:
-            self.s3.create_bucket(
-                Bucket=bucket_name,
-                CreateBucketConfiguration={"LocationConstraint": self.region},
-            )
-
-            logging.info(f"{type} Bucket {bucket_name} created")
-
             if type == "model":
                 a = set_key(
                     dotenv_path=find_dotenv(),
@@ -66,8 +59,21 @@ class S3_Bucket:
                     key_to_set="BUCKET_DATASET",
                     value_to_set=str(bucket_name),
                 )
+            elif type == "logs":
+                a = set_key(
+                    dotenv_path=find_dotenv(),
+                    key_to_set="BUCKET_LOGS",
+                    value_to_set=str(bucket_name),
+                )
             else:
                 logging.error(f"Type {type} don't exist.")
+                
+            self.s3.create_bucket(
+                Bucket=bucket_name,
+                CreateBucketConfiguration={"LocationConstraint": self.region},
+            )
+
+            logging.info(f"{type} Bucket {bucket_name} created")
 
             if a[0]:
                 logging.info(f"{a[1]}={a[2]}")
@@ -170,6 +176,12 @@ class S3_Bucket:
             args (argparse.Namespace): Parsed commandline arguments.
         """
         if any(vars(args).values()):
+            if args.bucket_logs:
+                res = self.create_S3_bucket(args.bucket_logs, type="logs")
+                if not res:
+                    logging.error(f"{args.bucket_logs} not created")
+                    return
+            
             if args.file_path:
                 res = self.add_file_model_S3_bucket(
                     os.getenv("BUCKET_MODEL"), args.file_path, args.object_name
@@ -232,6 +244,12 @@ if __name__ == "__main__":
         "--bucket_dataset",
         type=str,
         help="Name of the bucket to be created and saved as dataset bucket.",
+    )
+    
+    parser.add_argument(
+        "--bucket_logs",
+        type=str,
+        help="Name of the bucket to be created and saved as dataset logs.",
     )
 
     parser.add_argument(

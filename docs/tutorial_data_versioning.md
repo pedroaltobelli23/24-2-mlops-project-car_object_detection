@@ -2,6 +2,8 @@
 
 Data versioning is a essencial step in any Machine Learning projects. It enables developer's teams to create multiple datasets and easily change between them when training. It is useful when the team have a lot of data and is trying to use only the samples that increase model performance. In this project [dvc](https://dvc.org/doc/api-reference) combined with git is used to implement this task. All datasets versions are stored at a S3 bucket.
 
+see ["Startup"](./tutorial_startup.md) before this one.
+
 ## Create a new data enviroment
 
 Sometimes, it is necessary to start everything all again. The following steps show how can you do that:

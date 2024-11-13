@@ -1,6 +1,6 @@
 # Steps for training
 
-Here is a step by step guide to train the model, see ["steps for data versioning"](./deploy.md)
+This is a step by step guide to train the model, see ["steps for data versioning"](./deploy.md) before this one.
 
 1. Unzip data using the command:
 
