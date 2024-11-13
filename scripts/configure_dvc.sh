@@ -11,6 +11,7 @@ if [ -z "$BUCKET_NAME" ]; then
     exit 1
 fi
 
+# Init dvc versioning
 dvc init
 
 dvc add data/data.zip
