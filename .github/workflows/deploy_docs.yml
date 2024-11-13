@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-  pull_request:
 
 jobs:
   deploy:
@@ -17,7 +16,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v3
         with:
-          python-version: '3.8'
+          python-version: '3.12'
 
       - name: Upgrade pip
         run: |
@@ -39,7 +38,9 @@ jobs:
       - name: Install dependencies
         run: python3 -m pip install -r ./requirements.txt
 
-      - run: mkdocs build
+      - name: Build documentation
+        working-directory: ./docs
+        run: make html
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
