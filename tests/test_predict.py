@@ -38,9 +38,9 @@ def test_predict():
     y1_true = center_y-(height/2)
     y2_true = center_y+(height/2)
     
-
-    resp = make_predictions(endpoint,img_path)
-
+    
+    resp = make_predictions(endpoint,img_path)[0]
+    
     assert resp["class"] == true_label, f"Expected class {true_label}, got {resp['class']}"
     print(resp["class"], true_label)
     assert abs(resp["x1"] - x1_true) <= tolerance, f"x1 mismatch: expected {x1_true}, got {resp['x1']}"

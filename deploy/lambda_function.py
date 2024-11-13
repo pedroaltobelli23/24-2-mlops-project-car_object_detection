@@ -154,7 +154,7 @@ def make_prediction(event, context):
             result.append(boxes[0])
             boxes = [box for box in boxes if intersectionOverUnion(box, boxes[0]) < 0.5]
 
-        result_dict = {}
+        result_list = []
         for i in range(len(result)):
             res = result[i]
             
@@ -165,7 +165,8 @@ def make_prediction(event, context):
             m_class = res[4]
             confidence = float(res[5])
             
-            result_dict[i] = {"x1":x1,"y1":y1,"x2":x2,"y2":y2,"class":m_class,"confidence":confidence}
+            result_list.append({"x1":x1,"y1":y1,"x2":x2,"y2":y2,"class":m_class,"confidence":confidence})
+            
             print(f"Detection {i}:")
             print(f"Class: {m_class}")
             print(f"Confidence (%): {confidence}")
@@ -173,8 +174,8 @@ def make_prediction(event, context):
             print(f"Point 2: ({x2},{y2})")
             print("\n")
         
-        if len(result_dict)>0:
-            return {"result":result_dict}
+        if len(result_list)>0:
+            return {"result":result_list}
         else:
             print(f"No detections found in the image.")
             return {"result":None}

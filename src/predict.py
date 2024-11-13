@@ -19,4 +19,4 @@ def make_predictions(endpoint,image_path):
     resp = requests.post(endpoint, data=data).json()["result"]
     print(resp)
     
-    return resp[0]
+    return resp
