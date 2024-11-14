@@ -12,7 +12,7 @@ def make_predictions(endpoint,image_path):
         
         Returns:
         ~~~~~~~~~~
-        dict: JSON response from the API.
+        dict: JSON response from the API. "result".
     """
     print("Endpoint: ",endpoint)
     data = open(image_path,"rb").read()
