@@ -1,13 +1,5 @@
-# 24-2-mlops-project-car_object_detection
+# Cars and Motorbikes detection
 
-## Introduction
+#### Object detection application to detect if there are vehicles or a motorbikes in the uploaded image. YOLOv8 model fine tunned with the [Stanford car dataset](https://universe.roboflow.com/openglpro/stanford_car).
 
-**TO DO**
-
-Dataset from:
-
-https://universe.roboflow.com/openglpro/stanford_car
-
-I used the YOLOv8 dataset
-
-This dataset can detect both cars and bikes. I merged both train and test dataset using the script data/merge_train_test.py
+#### More information can be found in the [Documentation](https://insper-classroom.github.io/24-2-mlops-project-car_object_detection/).
