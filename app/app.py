@@ -28,7 +28,7 @@ def draw_bbox(img,boxes):
 
 def main():
     endpoint = "https://9kq6eqv1bh.execute-api.us-east-2.amazonaws.com/predict"
-    with open("app/index.md") as f:
+    with open("index.md") as f:
         st.markdown(f.read())
     
     uploaded_file = st.file_uploader("Upload car image",type=["png","jpg"])
