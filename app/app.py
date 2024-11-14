@@ -3,6 +3,10 @@ import requests
 import numpy as np
 import cv2
 import random
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 def draw_bbox(img,boxes):
     
@@ -26,8 +30,7 @@ def draw_bbox(img,boxes):
     return img
     
 
-def main():
-    endpoint = "https://9kq6eqv1bh.execute-api.us-east-2.amazonaws.com/predict"
+def main(endpoint):
     with open("index.md") as f:
         st.markdown(f.read())
     
@@ -56,4 +59,8 @@ def main():
     return None
 
 if __name__=="__main__":
-    main()
+    endpoint = os.getenv("ENDPOINT","default_endpoint")+"/predict"
+    region = os.getenv("AWS_REGION")
+    
+    endpoint = endpoint.replace("REGION",region)
+    main(endpoint)
