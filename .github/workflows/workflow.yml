@@ -92,7 +92,7 @@ jobs:
 
         - name: Run pytest
           run: pytest tests/test_predict.py
-    Deploy-EC2-Webpage:
+    Deploy-Heroku-Webpage:
       runs-on: ubuntu-22.04
       needs: [Create-API-Endpoint, Run-Tests]
       steps:

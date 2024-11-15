@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>src &mdash; Car Detection Mlops  documentation</title>
+  <title>logs &mdash; Car Detection Mlops  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
@@ -40,19 +40,24 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Tutorial:</span></p>
-<ul>
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="tutorial_startup.html">Startup</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorial_data_versioning.html">Steps for data versioning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorial_training.html">Steps for training</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorial_deploy.html">Steps for deploying</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Modules:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="train.html">train module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="predict.html">predict module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dataset.html">dataset module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="s3_bucket.html">s3_bucket module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="train.html">Train module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="predict.html">Predict module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataset.html">Dataset module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="s3_bucket.html">S3 Bucket module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lambda_function.html">Lambda Function module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deploy_API.html">Deploy API module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="see_logs_lambda.html">Logs module</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="scripts.html">Bash scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scripts.html#yml-script">YML script</a></li>
 </ul>
 
         </div>
@@ -69,7 +74,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">src</li>
+      <li class="breadcrumb-item active">logs</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/modules.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -79,17 +84,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="src">
-<h1>src<a class="headerlink" href="#src" title="Link to this heading"></a></h1>
+  <section id="logs">
+<h1>logs<a class="headerlink" href="#logs" title="Link to this heading"></a></h1>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="predict.html">predict module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="predict.html#predict.make_predictions"><code class="docutils literal notranslate"><span class="pre">make_predictions()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="train.html">train module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="train.html#train.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="train.html#train.train_with_YOLO"><code class="docutils literal notranslate"><span class="pre">train_with_YOLO()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="see_logs_lambda.html">Logs module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="see_logs_lambda.html#see_logs_lambda.get_logs"><code class="docutils literal notranslate"><span class="pre">get_logs()</span></code></a></li>
 </ul>
 </li>
 </ul>

@@ -18,6 +18,7 @@ if [ -z "$BUCKET_NAME" ]; then
     exit 1
 fi
 
+# Init dvc versioning
 dvc init
 
 dvc add data/data.zip
@@ -62,6 +63,7 @@ if [ -z "$DROP" ]; then
     exit 1
 fi
 
+# Download data and Drop images and respective labels of the full folder
 python3 data/dataset.py --drop $DROP --download_data
 
 zip -r data/data.zip data/data/
@@ -140,8 +142,7 @@ jobs:
                 IMAGE_TAG: latest
               run: |
                 docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG --platform linux/amd64 -f deploy/Dockerfile .
-                docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-            
+                docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG  
     Create-API-Endpoint:
         runs-on: ubuntu-latest
         needs: Amazon-ECR-Image
@@ -170,6 +171,10 @@ jobs:
             run: |
               endpoint=$(python deploy/deploy_API.py --image_uri ${{secrets.AWS_ACCOUNT_ID}}.dkr.ecr.${{secrets.AWS_REGION}}.amazonaws.com/${{secrets.ECR_NAME}}:latest --api_gateway demo_project_pedroatp)
               echo "api_endpoint=$endpoint" >> "$GITHUB_OUTPUT"
+          
+          - name: Sleep for 30 seconds
+            run: sleep 30s
+            shell: bash
     Run-Tests:
       runs-on: ubuntu-latest
       needs: Create-API-Endpoint
@@ -190,6 +195,58 @@ jobs:
 
         - name: Run pytest
           run: pytest tests/test_predict.py
+    Deploy-Heroku-Webpage:
+      runs-on: ubuntu-22.04
+      needs: [Create-API-Endpoint, Run-Tests]
+      steps:
+        - uses: actions/checkout@v4
+        - uses: akhileshns/heroku-deploy@v3.13.15
+          with:
+            heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+            heroku_app_name: ${{ vars.HEROKU_APP_NAME }}
+            heroku_email: ${{ vars.HEROKU_EMAIL }}
+            appdir: "app"
+          env:
+            HD_ENDPOINT: ${{ needs.Create-API-Endpoint.outputs.api_endpoint }}
+            HD_AWS_REGION: ${{ secrets.AWS_REGION }}
+    deploy-docs:
+      runs-on: ubuntu-latest
+      permissions:
+        contents: write
+      steps:
+        - uses: actions/checkout@v4
 
-          
+        - name: Setup Python
+          uses: actions/setup-python@v5
+          with:
+            python-version: '3.12'
+
+        - name: Upgrade pip
+          run: python -m pip install --upgrade pip
+
+        - name: Get pip cache dir
+          id: pip-cache
+          run: echo "dir=$(pip cache dir)" >> $GITHUB_OUTPUT
+
+        - name: Cache dependencies
+          uses: actions/cache@v4
+          with:
+            path: ${{ steps.pip-cache.outputs.dir }}
+            key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+            restore-keys: |
+              ${{ runner.os }}-pip-
+
+        - name: Install dependencies
+          run: python -m pip install -r ./requirements.txt
+
+        - name: Build documentation
+          working-directory: ./docs
+          run: make html
+
+        - name: Deploy
+          uses: peaceiris/actions-gh-pages@v4
+          if: github.ref == 'refs/heads/main'
+          with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+            publish_dir: ./docs/_build/html
 ```

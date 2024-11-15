@@ -18,9 +18,12 @@ class S3_Bucket:
 
             Parameters:
             ~~~~~~~~~~~~~~~~~~~~
-            access_key_id (str): AWS access key ID for authentication.
-            secret_access_key (str): AWS secret access key for authentication.
-            region (str): AWS region for the S3 client.
+            access_key_id : str
+                AWS access key ID for authentication.
+            secret_access_key : str
+                AWS secret access key for authentication.
+            region : str
+                AWS region for the S3 client.
         """
         
         self.access_key_id = access_key_id
@@ -39,12 +42,15 @@ class S3_Bucket:
         
         Parameters:
         ~~~~~~~~~~~~~~~~~~~~
-        bucket_name (str): Name of the S3 bucket to create.
-        type (str): Type of bucket, either "model" or "dataset". Defaults to "model". If type is "model", will save in the .env file as BUCKET_MODEL, otherwise, will save as BUCKET_DATASET
+        bucket_name : str
+            Name of the S3 bucket to create.
+        type : str 
+            Type of bucket, either "model" or "dataset". Defaults to "model". If type is "model", will save in the .env file as BUCKET_MODEL, otherwise, will save as BUCKET_DATASET
 
         Returns:
         ~~~~~~~~~~
-        bool: True if bucket creation is successful, False otherwise.
+        bool
+            True if bucket creation is successful, False otherwise.
         """
         try:
             if type == "model":
@@ -57,12 +63,6 @@ class S3_Bucket:
                 a = set_key(
                     dotenv_path=find_dotenv(),
                     key_to_set="BUCKET_DATASET",
-                    value_to_set=str(bucket_name),
-                )
-            elif type == "logs":
-                a = set_key(
-                    dotenv_path=find_dotenv(),
-                    key_to_set="BUCKET_LOGS",
                     value_to_set=str(bucket_name),
                 )
             else:
@@ -90,11 +90,13 @@ class S3_Bucket:
 
             Parameters:
             ~~~~~~~~~~~~~~~~~~~~
-            bucket_name (str): Name of the S3 bucket to delete.
+            bucket_name : str
+                Name of the S3 bucket to delete.
 
             Returns:
             ~~~~~~~~~~
-            bool: True if bucket deletion is successful, False otherwise.
+            bool
+                True if bucket deletion is successful, False otherwise.
         """
         try:
             bucket = boto3.resource(
@@ -118,7 +120,8 @@ class S3_Bucket:
 
             Returns:
             ~~~~~~~~~~
-            bool: True if listing is successful, False otherwise.
+            bool
+                True if listing is successful, False otherwise.
         """
         try:
             response = self.s3.list_buckets()
@@ -139,13 +142,17 @@ class S3_Bucket:
 
             Parameters:
             ~~~~~~~~~~~~~~~~~~~~
-            bucket_name (str): Name of the S3 bucket where the file will be stored.
-            file_path (str): Path to the file to be uploaded.
-            object_name (str): Name (with file extension) of the object in S3.
+            bucket_name : str
+                Name of the S3 bucket where the file will be stored.
+            file_path : str
+                Path to the file to be uploaded.
+            object_name : str
+                Name (with file extension) of the object in S3.
 
             Returns:
             ~~~~~~~~~~
-            bool: True if file upload is successful, False otherwise.
+            bool 
+                True if file upload is successful, False otherwise.
         """
         try:
             base, ext = os.path.splitext(object_name)
@@ -173,15 +180,10 @@ class S3_Bucket:
 
             Parameters:
             ~~~~~~~~~~~~~~~~~~~~
-            args (argparse.Namespace): Parsed commandline arguments.
+            args : argparse.Namespace
+                Parsed commandline arguments.
         """
         if any(vars(args).values()):
-            if args.bucket_logs:
-                res = self.create_S3_bucket(args.bucket_logs, type="logs")
-                if not res:
-                    logging.error(f"{args.bucket_logs} not created")
-                    return
-            
             if args.file_path:
                 res = self.add_file_model_S3_bucket(
                     os.getenv("BUCKET_MODEL"), args.file_path, args.object_name
@@ -244,12 +246,6 @@ if __name__ == "__main__":
         "--bucket_dataset",
         type=str,
         help="Name of the bucket to be created and saved as dataset bucket.",
-    )
-    
-    parser.add_argument(
-        "--bucket_logs",
-        type=str,
-        help="Name of the bucket to be created and saved as dataset logs.",
     )
 
     parser.add_argument(

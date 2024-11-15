@@ -1,3 +1,6 @@
+"""
+    Application using streamlit. User upload image and prediction is made. If there are any detections, show the image with the bounding boxes. 
+"""
 import streamlit as st
 import requests
 import numpy as np
@@ -9,6 +12,21 @@ import os
 load_dotenv()
 
 def draw_bbox(img,boxes):
+    """
+        Draw bounding boxes with random colors in the image for each detection.
+        
+        Parameters:
+        ~~~~~~~~~~~~~~~~~~~~
+        img : numpy.ndarray
+            The image on which bounding boxes will be drawn.
+        boxes : list of dict
+            Each dictionary in the list represents a bounding box.
+        
+        Returns:
+        ~~~~~~~~~~
+        numpy.ndarray
+            Modified image with bounding boxes.
+    """
     
     for box in boxes:
         # Use random color for each box
@@ -31,6 +49,21 @@ def draw_bbox(img,boxes):
     
 
 def main(endpoint):
+    """
+        Streamlit application main function.
+        
+        Parameters:
+        ~~~~~~~~~~~~~~~~~~~~
+        endpoint : str
+            The AWS API endpoint.
+
+        Functionality:
+        - Displays "index.md" file.
+        - `st.file_uploader` allows user to upload an image file (PNG or JPG).
+        - Sends the uploaded image to the specified endpoint for object detection.
+        - Draws bounding boxes of detected objects on the image, if any.
+        - Displays the modified image with bounding boxes or the original image if no detections are found.
+    """
     with open("index.md") as f:
         st.markdown(f.read())
     

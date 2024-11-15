@@ -10,6 +10,7 @@ if [ -z "$DROP" ]; then
     exit 1
 fi
 
+# Download data and Drop images and respective labels of the full folder
 python3 data/dataset.py --drop $DROP --download_data
 
 zip -r data/data.zip data/data/

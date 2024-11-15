@@ -20,7 +20,7 @@ git tag -d $(git tag -l)
 
 ![tags_erased](./_static/imgs/tags_erased.png)
 
-2. Run `data.sh to create the file "data/data.zip" with your preprocessed data. Drop value is the ratio of the dowloaded dataset that will be erased.
+2. Run `data.sh` to create the file `data/data.zip` with your preprocessed data. Drop value is the ratio of the dowloaded dataset that will be erased. E.g.: 0.5 will erase 50% of the downloaded dataset. This step is optinal, you can also do the preprocessing manually or by changing `dataset.py`.
 
 ```Bash
 ./scripts/data.sh <drop_value>
@@ -38,7 +38,7 @@ After that, you will have a tag v0.0.0 with the first version of the dataset!
 
 Everytime you want to create a new dataset version, run the steps bellow:
 
-1. Do changes in the function prepocess from `dataset.py`. Then, run `data.sh`:
+1. Run `data.sh`:
 
 
 ```{admonition} WARNING

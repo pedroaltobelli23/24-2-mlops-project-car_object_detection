@@ -1,8 +1,7 @@
-src
-===
+logs
+====
 
 .. toctree::
    :maxdepth: 4
 
-   predict
-   train
+   see_logs_lambda

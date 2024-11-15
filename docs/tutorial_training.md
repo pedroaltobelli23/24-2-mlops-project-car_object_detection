@@ -1,6 +1,6 @@
 # Steps for training
 
-This is a step by step guide to train the model, see ["steps for data versioning"](./deploy.md) before this one.
+This is a step by step guide to train the model, see [steps for data versioning](./tutorial_data_versioning.md) before this one.
 
 1. Unzip data using the command:
 
@@ -19,9 +19,9 @@ sudo vim settings.json
 Do the following changes in settings.json:
 
 ```Json
-"datasets_dir": "/home/user/your_path/24-2-mlops-project-car_object_detection",
-"weights_dir": "/home/user/your_path/24-2-mlops-project-car_object_detection/models/weights",
-"runs_dir": "/home/user/your_path/24-2-mlops-project-car_object_detection/models/runs",
+"datasets_dir": "/home/user/your_path/repo-name",
+"weights_dir": "/home/user/your_path/repo-name/models/weights",
+"runs_dir": "/home/user/your_path/repo-name/models/runs",
 ```
 
 3. In the root folder of the repository, start Mlflow:

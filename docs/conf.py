@@ -19,6 +19,7 @@ import os
 sys.path.insert(0, os.path.abspath("../src"))
 sys.path.insert(0, os.path.abspath("../data"))
 sys.path.insert(0, os.path.abspath("../deploy"))
+sys.path.insert(0, os.path.abspath("../logs"))
 
 extensions = [
     "sphinx.ext.autodoc",
@@ -34,5 +35,5 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = "sphinx_rtd_theme"
+html_theme = "furo"
 html_static_path = ['_static']

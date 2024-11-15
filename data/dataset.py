@@ -18,8 +18,13 @@ class Dataset:
         pass
     
     def dowload_dataset(self):
-        """Download and unzip data from https://universe.roboflow.com/openglpro/stanford_car/dataset/10
-        and put it inside "data" folder
+        """
+            Download and unzip the dataset inside `data` folder. Use the Roboflow API Key.
+            
+            - Workspace: openglpro
+            - Dataset: stanford_car
+            - Version: 10
+            - Model: YOLOv8
         """
         
         location = "data/data/"
@@ -48,9 +53,12 @@ class Dataset:
 
             Parameters:
             ~~~~~~~~~~~~~~~~~~~~
-            file_list (list): All files inside origin dir that will be moved
-            origin_dir (strPath): Source diretory
-            destination_dir (strPath): Destination diretory
+            file_list : list 
+                All files inside origin dir that will be moved
+            origin_dir : strPath
+                Source diretory
+            destination_dir : strPath
+                Destination diretory
         """
         try:
             for file_name in tqdm(file_list):
@@ -66,12 +74,12 @@ class Dataset:
 
     def merge_train_test(self, remove_test=True):
         """
-            From the https://universe.roboflow.com/openglpro/stanford_car dataset, merge the
-            test folder with the train folder.
+            From the downloaded dataset merge the `test` folder with the train folder.
 
             Parameters:
             ~~~~~~~~~~~~~~~~~~~~
-            remove_test (bool): Remove the test folder after merge. Default is True.
+            remove_test : bool 
+                Remove the test folder after merge. Default is True.
         """
         
         train_dir = "data/data/train"
@@ -102,11 +110,12 @@ class Dataset:
 
     def preprocess(self, drop=0.5):
         """
-            Simple preprocessing. Drop drop*100 from the train and valid datasets
+            Simple preprocessing. Drop `drop*100` from the train and valid datasets
 
             Parameters:
             ~~~~~~~~~~~~~~~~~~~~
-            drop (int): Ratio from dataset to be dropped
+            drop : int
+                Ratio from dataset to be dropped
         """
         
         train_dir = "data/data/train"

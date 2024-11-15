@@ -69,11 +69,13 @@ def make_prediction(event, context):
 
         Parameters:
         ~~~~~~~~~~~~~~~~~~~~
-        event (dict): Event data from AWS Lambda containing the encoded image.
+        event : dict
+            Event data from AWS Lambda containing the encoded image.
         
         Returns:
         ~~~~~~~~~~
-        dict: The result of the prediction, containing detected bounding boxes or an error message.
+        dict
+            The result of the prediction, containing detected bounding boxes or an error message.
             Inside "result" there is a list of dicts with the following keys:
                 - Class (str): Name of the class
                 - Confidence (float): Percentage of confidence for the bounding box predicted
