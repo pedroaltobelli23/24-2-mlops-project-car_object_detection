@@ -75,7 +75,8 @@ class Deployment:
             try:
                 response = lambda_client.delete_function(FunctionName=function_name)
             except Exception as e:
-                print(f"Function don't exist: {str(e)}")
+                # The function don't exist in the AWS
+                pass
 
             response = lambda_client.create_function(
                 FunctionName=function_name,
