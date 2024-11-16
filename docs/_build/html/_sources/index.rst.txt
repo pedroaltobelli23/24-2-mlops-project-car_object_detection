@@ -6,17 +6,21 @@
 Welcome to Car Detection Mlops's documentation!
 ===============================================
 
-In this project: 
+Deploy a full Mlops Object detection Web application that detects cars and motobikes!
 
-- Vehicles detection web application deployed using `Heroku`_. 
-- `AWS API Gateway`_ is created using an `AWS Lambda function`_ inside an `AWS ECR`_.
-- Documentation created using `Sphinx`_ and deployed using `Github Pages`_.
-- Train model with `YOLO`_ and export in `ONNX`_ format. Use `Onnxruntime`_ to make the predictions inside the lambda function.
-- Download and preprocess dataset.
+Features:
+
+- Download and preprocess the `Stanford Cars Dataset`_.
 - Data versioning with `DVC`_.
+- Train model with `YOLO`_ and export in `ONNX`_ format.
+- `AWS API Gateway`_ is created using an `AWS Lambda function`_ inside an `AWS ECR`_ that make predictions using the trained model.
+- AWS S3 Bucket used for storing Dataset versions and the model that will be used by the Lambda function.
+- Documentation created using `Sphinx`_ and deployed using `Github Pages`_.
+- Web Application deployed using `Heroku`_.
+- Automated pipeline to deploy all the infrastructure to production using `Github Actions`_.
 - Local logging and also `CloudWatch`_ logging (for the lambda function).
-- Automated pipeline to deploy the models to production using `Github Actions`_.
 
+.. _Stanford Cars Dataset: https://universe.roboflow.com/openglpro/stanford_car/dataset/10
 .. _Heroku: https://www.heroku.com/platform
 .. _AWS ECR: https://aws.amazon.com/en/ecr/
 .. _AWS API Gateway: https://aws.amazon.com/en/api-gateway/

@@ -261,16 +261,18 @@
         <article role="main" id="furo-main-content">
           <section id="welcome-to-car-detection-mlops-s-documentation">
 <h1>Welcome to Car Detection Mlops’s documentation!<a class="headerlink" href="#welcome-to-car-detection-mlops-s-documentation" title="Link to this heading">¶</a></h1>
-<p>In this project:</p>
+<p>Deploy a full Mlops Object detection Web application that detects cars and motobikes!</p>
+<p>Features:</p>
 <ul class="simple">
-<li><p>Vehicles detection web application deployed using <a class="reference external" href="https://www.heroku.com/platform">Heroku</a>.</p></li>
-<li><p><a class="reference external" href="https://aws.amazon.com/en/api-gateway/">AWS API Gateway</a> is created using an <a class="reference external" href="https://docs.aws.amazon.com/lambda/latest/dg/welcome.html">AWS Lambda function</a> inside an <a class="reference external" href="https://aws.amazon.com/en/ecr/">AWS ECR</a>.</p></li>
-<li><p>Documentation created using <a class="reference external" href="https://www.sphinx-doc.org/en/master/">Sphinx</a> and deployed using <a class="reference external" href="https://pages.github.com/">Github Pages</a>.</p></li>
-<li><p>Train model with <a class="reference external" href="https://docs.ultralytics.com/">YOLO</a> and export in <a class="reference external" href="https://onnx.ai/">ONNX</a> format. Use <a class="reference external" href="https://onnxruntime.ai/">Onnxruntime</a> to make the predictions inside the lambda function.</p></li>
-<li><p>Download and preprocess dataset.</p></li>
+<li><p>Download and preprocess the <a class="reference external" href="https://universe.roboflow.com/openglpro/stanford_car/dataset/10">Stanford Cars Dataset</a>.</p></li>
 <li><p>Data versioning with <a class="reference external" href="https://dvc.org/">DVC</a>.</p></li>
+<li><p>Train model with <a class="reference external" href="https://docs.ultralytics.com/">YOLO</a> and export in <a class="reference external" href="https://onnx.ai/">ONNX</a> format.</p></li>
+<li><p><a class="reference external" href="https://aws.amazon.com/en/api-gateway/">AWS API Gateway</a> is created using an <a class="reference external" href="https://docs.aws.amazon.com/lambda/latest/dg/welcome.html">AWS Lambda function</a> inside an <a class="reference external" href="https://aws.amazon.com/en/ecr/">AWS ECR</a> that make predictions using the trained model.</p></li>
+<li><p>AWS S3 Bucket used for storing Dataset versions and the model that will be used by the Lambda function.</p></li>
+<li><p>Documentation created using <a class="reference external" href="https://www.sphinx-doc.org/en/master/">Sphinx</a> and deployed using <a class="reference external" href="https://pages.github.com/">Github Pages</a>.</p></li>
+<li><p>Web Application deployed using <a class="reference external" href="https://www.heroku.com/platform">Heroku</a>.</p></li>
+<li><p>Automated pipeline to deploy all the infrastructure to production using <a class="reference external" href="https://github.com/features/actions">Github Actions</a>.</p></li>
 <li><p>Local logging and also <a class="reference external" href="https://aws.amazon.com/pt/cloudwatch/">CloudWatch</a> logging (for the lambda function).</p></li>
-<li><p>Automated pipeline to deploy the models to production using <a class="reference external" href="https://github.com/features/actions">Github Actions</a>.</p></li>
 </ul>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Tutorial:</span></p>
