@@ -1,0 +1,15 @@
+artifact_uri: file:///home/pedro/Documents/mlops/24-2-mlops-project-car_object_detection/src/../models/runs/mlflow/223778325236810223/ecc35fad281a43309f29a1ad49384e81/artifacts
+end_time: 1732209190684
+entry_point_name: ''
+experiment_id: '223778325236810223'
+lifecycle_stage: active
+run_id: ecc35fad281a43309f29a1ad49384e81
+run_name: adorable-stoat-527
+run_uuid: ecc35fad281a43309f29a1ad49384e81
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1732208483687
+status: 3
+tags: []
+user_id: pedro
