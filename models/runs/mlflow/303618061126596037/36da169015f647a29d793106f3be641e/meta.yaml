@@ -1,0 +1,15 @@
+artifact_uri: file:///home/pedro/Documents/mlops/24-2-mlops-project-car_object_detection/src/../models/runs/mlflow/303618061126596037/36da169015f647a29d793106f3be641e/artifacts
+end_time: 1732214419761
+entry_point_name: ''
+experiment_id: '303618061126596037'
+lifecycle_stage: active
+run_id: 36da169015f647a29d793106f3be641e
+run_name: sincere-sow-442
+run_uuid: 36da169015f647a29d793106f3be641e
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1732214299285
+status: 3
+tags: []
+user_id: pedro

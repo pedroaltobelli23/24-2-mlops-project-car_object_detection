@@ -124,7 +124,7 @@ if __name__ == "__main__":
     # Change this parameters when training
     hiper_parameters = {
         "experiment_name": "training",
-        "epochs": 5,
+        "epochs": 2,
         "batch": 12,
         "optimizer": "SGD",
         "imgsz": 448,
