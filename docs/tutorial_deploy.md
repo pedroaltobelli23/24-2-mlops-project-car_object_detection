@@ -35,6 +35,16 @@ The URL for the heroku application can be found in:
 
 ![heroku_app_url](./_static/imgs/heroku_app_url.png)
 
+4. If you would like to do changes on the documentation, it is necessary to do a push directly to the main.
+
+```Bash
+git add .
+
+git commit -m "Doc changes"
+
+git push origin main
+```
+
 The URL for the documentation will be a github page in your account.
 
 ![deployment_docs](./_static/imgs/deployment_docs.png)
