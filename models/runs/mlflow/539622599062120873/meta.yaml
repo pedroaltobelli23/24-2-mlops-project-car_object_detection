@@ -1,0 +1,6 @@
+artifact_location: file:///home/pedro/Documents/mlops/24-2-mlops-project-car_object_detection/src/../models/runs/mlflow/539622599062120873
+creation_time: 1732215353162
+experiment_id: '539622599062120873'
+last_update_time: 1732215353162
+lifecycle_stage: active
+name: training

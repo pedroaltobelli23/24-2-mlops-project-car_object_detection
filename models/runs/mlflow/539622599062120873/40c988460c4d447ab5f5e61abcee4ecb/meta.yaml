@@ -1,0 +1,15 @@
+artifact_uri: file:///home/pedro/Documents/mlops/24-2-mlops-project-car_object_detection/src/../models/runs/mlflow/539622599062120873/40c988460c4d447ab5f5e61abcee4ecb/artifacts
+end_time: 1732216049479
+entry_point_name: ''
+experiment_id: '539622599062120873'
+lifecycle_stage: active
+run_id: 40c988460c4d447ab5f5e61abcee4ecb
+run_name: rebellious-shad-228
+run_uuid: 40c988460c4d447ab5f5e61abcee4ecb
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1732215353248
+status: 3
+tags: []
+user_id: pedro
