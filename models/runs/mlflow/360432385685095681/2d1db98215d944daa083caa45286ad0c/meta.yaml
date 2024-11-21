@@ -1,0 +1,15 @@
+artifact_uri: file:///home/pedro/Documents/mlops/24-2-mlops-project-car_object_detection/src/../models/runs/mlflow/360432385685095681/2d1db98215d944daa083caa45286ad0c/artifacts
+end_time: 1732228204805
+entry_point_name: ''
+experiment_id: '360432385685095681'
+lifecycle_stage: active
+run_id: 2d1db98215d944daa083caa45286ad0c
+run_name: sincere-stag-324
+run_uuid: 2d1db98215d944daa083caa45286ad0c
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1732228031935
+status: 3
+tags: []
+user_id: pedro
