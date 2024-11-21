@@ -18,7 +18,7 @@ dvc add data/data.zip
 
 git add data/data.zip.dvc 
 
-git commit -m "Add data to project"
+git commit -m "Add data to project [skip ci]"
 
 git push
 
@@ -31,7 +31,7 @@ dvc push
 
 git add .
 
-git commit -m "version 0"
+git commit -m "version 0 [skip ci]"
 
 git push
 
