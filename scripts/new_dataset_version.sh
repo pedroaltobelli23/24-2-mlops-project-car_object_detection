@@ -10,7 +10,7 @@ dvc push
 
 echo "commit to github"
 git add .
-git commit -m "version $VERSION"
+git commit -m "version $VERSION [skip ci]"
 git push
 
 git tag -a $VERSION -m "Release version $VERSION"

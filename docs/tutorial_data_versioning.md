@@ -36,10 +36,9 @@ After that, you will have a tag v0.0.0 with the first version of the dataset!
 
 ## Create a new dataset version
 
-Everytime you want to create a new dataset version, run the steps bellow:
+Everytime you want to create a new dataset version, erase the `data.zip` file and follow the steps bellow:
 
 1. Run `data.sh`:
-
 
 ```{admonition} WARNING
 :class: warning
@@ -59,7 +58,10 @@ git checkout main
 ./scripts/new_dataset_version.sh vA.B.C
 ```
 
-3. To use a specific data version:
+
+## Use specific data version
+
+1. Checkout to the tag and do a dvc checkout:
 
 ```Bash
 git checkout vA.B.C

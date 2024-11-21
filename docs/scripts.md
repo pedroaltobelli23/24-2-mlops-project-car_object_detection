@@ -25,7 +25,7 @@ dvc add data/data.zip
 
 git add data/data.zip.dvc 
 
-git commit -m "Add data to project"
+git commit -m "Add data to project [skip ci]"
 
 git push
 
@@ -38,7 +38,7 @@ dvc push
 
 git add .
 
-git commit -m "version 0"
+git commit -m "version 0 [skip ci]"
 
 git push
 
@@ -86,7 +86,7 @@ dvc push
 
 echo "commit to github"
 git add .
-git commit -m "version $VERSION"
+git commit -m "version $VERSION [skip ci]"
 git push
 
 git tag -a $VERSION -m "Release version $VERSION"
@@ -209,6 +209,16 @@ jobs:
           env:
             HD_ENDPOINT: ${{ needs.Create-API-Endpoint.outputs.api_endpoint }}
             HD_AWS_REGION: ${{ secrets.AWS_REGION }}
+```
+
+### workflow_docs.yml
+```
+name: Deploy documentation to github pages
+on:
+  push:
+    branches:
+      - main
+jobs:
     deploy-docs:
       runs-on: ubuntu-latest
       permissions:
