@@ -13,7 +13,7 @@ To make your own deploy of the website, it is necessary do the following steps f
 git checkout -b branch-vA.B.C
 ```
 
-3. Then, add the changes, commit and push branch to origin
+3. Add the changes, commit and push branch to origin. Create the pull request for the branch.
 
 ```Bash
 git add .
@@ -31,7 +31,7 @@ Go to the job `Run-Tests` to find the API Endpoint. `REGION` is the `AWS_REGION`
 
 ![api_endpoint_actions](./_static/imgs/api_endpoint_actions.png)
 
-The URL for the heroku application can be found in:
+If it is the fisrt time deploying the website the URL for the heroku application can be found in (also can be found at the Heroku platform):
 
 ![heroku_app_url](./_static/imgs/heroku_app_url.png)
 
